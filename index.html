@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Riesgo cardiovascular global · Guía de Estudio Nivel Residente</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --navy:#1b2631; --navy2:#283747; --blue:#34495e; --blue2:#46627f; --sky:#9fb3c8;
+  --orange:#c27c0e; --terra:#a4123f; --red:#c0392b; --green:#1e8449; --purple:#6c3483;
+  --bg:#f4f5f7; --card:#ffffff; --cardhead:#eef1f4; --text:#1c2733; --muted:#566573; --line:#dfe6ec;
+  --pearl:#fdf6e7; --alert:#fdecec; --algo:#eef2f6; --zebra:#f4f6f8; --ok:#e9f6ee;
+  --shadow:0 2px 6px rgba(27,38,49,.06),0 8px 24px rgba(27,38,49,.07);
+  --sbw:290px;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 16px)}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#111519; --card:#1a2027; --cardhead:#212a33; --text:#e3e9ef; --muted:#9fb0c0; --line:#2f3b47;
+    --pearl:#2b2312; --alert:#321a1c; --algo:#1e2730; --zebra:#1c242c; --ok:#14301f; --blue:#3d556d; --blue2:#6d8aa8;
+    --shadow:0 2px 10px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#111519; --card:#1a2027; --cardhead:#212a33; --text:#e3e9ef; --muted:#9fb0c0; --line:#2f3b47;
+  --pearl:#2b2312; --alert:#321a1c; --algo:#1e2730; --zebra:#1c242c; --ok:#14301f; --blue:#3d556d; --blue2:#6d8aa8;
+  --shadow:0 2px 10px rgba(0,0,0,.35);
+}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Roboto,"Segoe UI",system-ui,-apple-system,Arial,sans-serif;font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+img{max-width:100%}
+a{color:var(--blue2)}
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px;border-radius:4px}
+
+/* progress */
+#progress{position:fixed;top:0;left:0;height:3px;background:var(--orange);width:0;z-index:60}
+
+/* sidebar */
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sbw);background:var(--navy);color:#dbe7f3;overflow-y:auto;z-index:50;
+  padding:calc(env(safe-area-inset-top,0px) + 22px) 0 calc(env(safe-area-inset-bottom,0px) + 22px);border-right:4px solid var(--terra)}
+.sb-brand{padding:0 22px 18px;border-bottom:1px solid rgba(255,255,255,.12)}
+.sb-brand .tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.12em;color:#fff;background:var(--terra);padding:3px 10px;border-radius:999px}
+.sb-brand h1{font-size:19px;line-height:1.25;margin:10px 0 2px;color:#fff}
+.sb-brand p{margin:0;font-size:13px;color:#9fb9d3}
+.toc{list-style:none;margin:0;padding:12px 10px}
+.toc>li{margin:2px 0}
+.toc a{display:block;color:#dbe7f3;text-decoration:none;padding:7px 12px;border-radius:8px;font-size:14px;line-height:1.35}
+.toc a:hover{background:rgba(255,255,255,.08)}
+.toc a.active{background:var(--blue2);color:#fff}
+.toc .lvl1>a{font-weight:700;color:#fff;margin-top:8px}
+.toc ul{list-style:none;padding:0 0 0 10px;margin:0}
+.toc ul a{font-size:13px;color:#b5cbe0;padding:5px 12px}
+.sb-tools{padding:12px 22px;border-top:1px solid rgba(255,255,255,.12);display:flex;gap:8px;flex-wrap:wrap}
+.sb-tools button{flex:1;background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:8px;font:inherit;font-size:13px;cursor:pointer}
+.sb-tools button:hover{background:rgba(255,255,255,.18)}
+#menuBtn{display:none;position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);left:12px;z-index:70;background:var(--terra);color:#fff;border:0;border-radius:10px;padding:10px 14px;font:inherit;font-weight:700;box-shadow:var(--shadow);cursor:pointer}
+#scrim{display:none}
+
+/* main */
+main{margin-left:var(--sbw)}
+.hero{background:linear-gradient(120deg,var(--navy) 0%,var(--navy2) 50%,#5b7590 100%);color:#fff;text-align:center;padding:64px 24px 54px;border-bottom:7px solid var(--terra);position:relative;overflow:hidden}
+.hero>*{position:relative;z-index:1}
+.hero svg.ecg{position:absolute;z-index:0;left:0;right:0;bottom:2px;width:100%;height:70px;opacity:.22}
+.hero .eyebrow{letter-spacing:.22em;font-size:13px;font-weight:600;color:#cfe3f5}
+.hero h1{font-size:clamp(30px,5vw,50px);line-height:1.1;margin:14px 0 10px;font-weight:800;letter-spacing:-.01em}
+.hero .sub{font-size:clamp(16px,2.2vw,20px);color:#d6e6f4;margin:0 auto;max-width:760px}
+.hero .chips{margin-top:22px;margin-bottom:26px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.hero .chips span{font-size:12.5px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);padding:4px 12px;border-radius:999px}
+.wrap{max-width:1040px;margin:0 auto;padding:34px 22px 60px}
+
+/* section card */
+.sec{background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);margin:0 0 34px;overflow:hidden}
+.sec-head{background:var(--cardhead);padding:28px 32px 0;border-bottom:4px solid var(--sky)}
+.badge{display:inline-block;background:var(--terra);color:#fff;font-size:11.5px;font-weight:700;letter-spacing:.06em;padding:4px 12px;border-radius:999px;text-transform:uppercase}
+.badge.ev{background:var(--orange);font-size:10.5px;padding:2px 8px;vertical-align:2px;margin-left:4px;letter-spacing:0}
+.badge.ev.b{background:var(--blue2)} .badge.ev.g{background:var(--green)} .badge.ev.r{background:var(--red)} .badge.ev.n{background:#7f8c8d}
+.sec-head h2{font-size:clamp(22px,3vw,28px);color:var(--navy2);margin:12px 0 0;padding-bottom:16px;border-bottom:2px solid var(--sky);line-height:1.25}
+:root[data-theme="dark"] .sec-head h2{color:#cfe3f5}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .sec-head h2{color:#cfe3f5}}
+.sec-head .lead{margin:12px 0 18px;color:var(--muted);font-size:15px}
+.sec-body{padding:26px 32px 30px}
+h3.sub{background:var(--blue);color:#fff;font-size:16px;padding:11px 18px;border-radius:8px;margin:30px 0 16px;scroll-margin-top:16px}
+h3.sub:first-child{margin-top:0}
+h4{color:var(--blue2);font-size:16px;margin:22px 0 8px}
+p{margin:0 0 12px;text-align:left}
+ul.dots{padding-left:20px;margin:6px 0 12px} ul.dots li{margin:4px 0}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:18px 28px}
+.cols3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:760px){.cols2,.cols3{grid-template-columns:1fr}}
+
+/* boxes */
+.box{border-radius:8px;padding:16px 18px;margin:18px 0;border-left:6px solid}
+.box .bt{font-weight:800;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.box p:last-child,.box ul:last-child{margin-bottom:0}
+.pearl{background:var(--pearl);border-color:var(--orange)} .pearl{border-color:var(--orange)} .pearl .bt{color:#8a5a00}
+.alert{background:var(--alert);border-color:var(--red)} .alert .bt{color:var(--red)}
+.algo{background:var(--algo);border-color:var(--blue2)} .algo .bt{color:var(--blue2)}
+.okbox{background:var(--ok);border-color:var(--green)} .okbox .bt{color:var(--green)}
+
+/* tables */
+.tw{overflow-x:auto;margin:14px 0 18px;border-radius:10px;border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;font-size:14.2px;min-width:560px}
+th{background:var(--navy2);color:#fff;text-align:left;padding:10px 12px;font-weight:600;vertical-align:bottom}
+td{padding:9px 12px;border-top:1px solid var(--line);vertical-align:top}
+tbody tr:nth-child(even){background:var(--zebra)}
+td.c,th.c{text-align:center}
+caption{caption-side:top;text-align:left;font-weight:700;padding:10px 12px;color:var(--muted);font-size:13px;background:var(--card)}
+
+/* flow / algorithm */
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:8px 0}
+.flow .node{flex:1 1 150px;background:var(--card);border:2px solid var(--blue2);border-radius:10px;padding:12px 14px;font-size:14px;position:relative}
+.flow .node b{display:block;color:var(--blue2);margin-bottom:4px}
+.flow .arrow{flex:0 0 34px;display:flex;align-items:center;justify-content:center;color:var(--orange);font-size:22px;font-weight:800}
+.flow .node.o{border-color:var(--orange)} .flow .node.o b{color:var(--orange)}
+.flow .node.r{border-color:var(--red)} .flow .node.r b{color:var(--red)}
+.flow .node.g{border-color:var(--green)} .flow .node.g b{color:var(--green)}
+@media (max-width:760px){.flow{flex-direction:column}.flow .arrow{transform:rotate(90deg);height:30px}}
+.vflow{display:flex;flex-direction:column;align-items:stretch;gap:0}
+.vflow>.arrow{color:var(--orange);font-weight:800;font-size:20px;line-height:1;padding:0 6px;margin:4px auto;width:fit-content;transform:rotate(90deg)}
+.branch{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.step{background:var(--card);border:2px solid var(--blue2);border-radius:10px;padding:12px 14px;font-size:14px}
+.step .h{font-weight:800;color:var(--blue2);margin-bottom:4px}
+.step.o{border-color:var(--orange)} .step.o .h{color:var(--orange)}
+.step.r{border-color:var(--red)} .step.r .h{color:var(--red)}
+.step.g{border-color:var(--green)} .step.g .h{color:var(--green)}
+.step.p{border-color:var(--purple)} .step.p .h{color:var(--purple)}
+
+/* pillars */
+.pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0}
+@media (max-width:860px){.pillars{grid-template-columns:1fr 1fr}}
+.pillar{border-radius:10px;padding:14px;color:#fff;text-align:center}
+.pillar .n{font-size:22px;font-weight:800}
+.pillar small{display:block;opacity:.92;font-size:12.5px;line-height:1.4;margin-top:4px}
+
+/* quad */
+.quad{display:grid;grid-template-columns:auto 1fr 1fr;gap:8px;font-size:14px;margin:12px 0}
+.quad .ax{font-weight:700;color:var(--muted);display:flex;align-items:center;justify-content:center;text-align:center;font-size:13px}
+.quad .q{border-radius:10px;padding:12px;border:2px solid}
+.quad .q b{display:block;margin-bottom:3px}
+
+/* image placeholders */
+.ph{border:2px dashed var(--sky);border-radius:10px;background:var(--algo);padding:18px;text-align:center;color:var(--muted);font-size:13.5px;min-height:150px;display:flex;flex-direction:column;justify-content:center;gap:6px}
+.ph .ic{font-size:28px}
+.ph b{color:var(--blue2);font-size:14px}
+
+/* details (round questions) */
+details.rq{border:1px solid var(--line);border-radius:10px;margin:10px 0;background:var(--card);overflow:hidden}
+details.rq summary{cursor:pointer;padding:14px 16px 14px 52px;font-weight:600;position:relative;list-style:none}
+details.rq summary::-webkit-details-marker{display:none}
+details.rq summary .num{position:absolute;left:12px;top:12px;width:28px;height:28px;border-radius:50%;background:var(--terra);color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center}
+details.rq[open] summary{background:var(--cardhead)}
+details.rq .ans{padding:4px 18px 16px 52px;border-top:1px solid var(--line)}
+details.rq .ans p:first-child{margin-top:12px}
+
+/* cases */
+.case{border:1px solid var(--line);border-radius:12px;margin:20px 0;overflow:hidden;background:var(--card)}
+.case-h{background:var(--navy2);color:#fff;padding:12px 18px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center}
+.case-h b{font-size:16px}
+.case-b{padding:16px 18px}
+.case .stage{border-left:4px solid var(--blue2);padding:8px 14px;margin:10px 0;background:var(--algo);border-radius:0 8px 8px 0}
+.case .stage.hidden{display:none}
+.case .stage .lab{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--blue2)}
+.case .stage.dx{border-color:var(--orange);background:var(--pearl)} .case .stage.dx .lab{color:var(--orange)}
+.case .stage.tx{border-color:var(--green);background:var(--ok)} .case .stage.tx .lab{color:var(--green)}
+.btn{background:var(--blue2);color:#fff;border:0;border-radius:8px;padding:9px 16px;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+.btn:hover{filter:brightness(1.1)}
+.btn.o{background:var(--terra)} .btn.ghost{background:transparent;color:var(--blue2);border:1px solid var(--blue2)}
+
+/* quiz */
+.qz{border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:14px 0;background:var(--card)}
+.qz .qt{font-weight:700;margin-bottom:10px}
+.qz .qt span{color:var(--terra)}
+.qz .opts{display:grid;gap:8px}
+.qz button.opt{text-align:left;background:var(--algo);border:1.5px solid var(--line);border-radius:8px;padding:10px 14px;font:inherit;font-size:14.5px;color:var(--text);cursor:pointer}
+.qz button.opt:hover:not(:disabled){border-color:var(--blue2)}
+.qz button.opt.right{background:#d5f1df;border-color:var(--green);color:#0d3b20;font-weight:600}
+.qz button.opt.wrong{background:#fadbd8;border-color:var(--red);color:#5b1610}
+.qz .exp{display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:var(--pearl);border-left:4px solid var(--orange);font-size:14.5px}
+.qz.done .exp{display:block}
+.score{position:sticky;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:5;background:var(--navy2);color:#fff;border-radius:10px;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;box-shadow:var(--shadow)}
+
+/* calculator */
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:0}
+.tabs button{background:var(--algo);border:1px solid var(--line);border-bottom:0;border-radius:8px 8px 0 0;padding:10px 14px;font:inherit;font-size:14px;font-weight:600;color:var(--muted);cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--navy2);color:#fff;border-color:var(--navy2)}
+.panel{border:1px solid var(--line);border-radius:0 10px 10px 10px;padding:18px;background:var(--card)}
+.panel[hidden]{display:none}
+.frm{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px 18px}
+.frm label{font-size:13.5px;font-weight:600;color:var(--muted);display:block;margin-bottom:4px}
+.frm select,.frm input[type=number]{width:100%;padding:9px 10px;border-radius:8px;border:1px solid var(--line);font:inherit;font-size:14.5px;background:var(--card);color:var(--text)}
+.chk{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:14px;cursor:pointer;background:var(--algo)}
+.chk input{margin-top:4px}
+.result{margin-top:16px;border-radius:10px;padding:16px 18px;border-left:6px solid var(--blue2);background:var(--algo)}
+.result .big{font-size:22px;font-weight:800;color:var(--navy2)}
+:root[data-theme="dark"] .result .big{color:#cfe3f5}
+.kpi{display:inline-block;padding:2px 10px;border-radius:999px;color:#fff;font-weight:700;font-size:13px}
+
+.foot{color:var(--muted);font-size:13px;text-align:center;padding:10px 0 30px}
+ol.refs{padding-left:26px;font-size:14px} ol.refs li{margin:6px 0}
+.small{font-size:13px;color:var(--muted)}
+mark{background:#f6e7b8;color:inherit;padding:0 3px;border-radius:3px}
+
+
+/* figuras */
+figure.fig{margin:22px 0 26px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--card);box-shadow:var(--shadow)}
+figure.fig .imgw{background:#fff;padding:14px;display:flex;justify-content:center;overflow-x:auto}
+figure.fig .imgw img{display:block;height:auto;max-width:100%;cursor:zoom-in;border-radius:4px}
+figure.fig .imgw.narrow img{max-width:min(100%,380px)}
+figure.fig figcaption{background:var(--navy2);color:#fff;padding:10px 16px;font-size:14px;font-weight:600;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+figure.fig figcaption .badge{background:var(--terra)}
+.fig-exp{padding:16px 20px 18px;font-size:15px}
+.fig-exp h5{font-size:14px;color:var(--orange);margin:14px 0 6px;text-transform:uppercase;letter-spacing:.04em}
+.fig-exp h5:first-child{margin-top:0}
+.fig-exp p:last-child,.fig-exp ul:last-child{margin-bottom:0}
+.fig-side{display:grid;grid-template-columns:minmax(0,380px) 1fr;gap:0}
+.fig-side .imgw{border-right:1px solid var(--line)}
+@media (max-width:860px){.fig-side{grid-template-columns:1fr}.fig-side .imgw{border-right:0;border-bottom:1px solid var(--line)}}
+#lightbox{position:fixed;inset:0;background:rgba(5,15,28,.88);display:none;align-items:center;justify-content:center;z-index:100;padding:calc(env(safe-area-inset-top,0px) + 20px) 20px calc(env(safe-area-inset-bottom,0px) + 20px);cursor:zoom-out}
+#lightbox.on{display:flex}
+#lightbox img{max-width:100%;max-height:100%;background:#fff;border-radius:6px}
+
+@media (max-width:1000px){
+  .sidebar{transform:translateX(-100%);transition:transform .25s ease}
+  body.nav-open .sidebar{transform:none}
+  body.nav-open #scrim{display:block;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:45}
+  #menuBtn{display:block}
+  main{margin-left:0}
+  .hero{padding-top:78px}
+  .sec-head{padding:22px 18px 0}.sec-body{padding:20px 18px 24px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.sidebar{transition:none}}
+@media print{.sidebar,#menuBtn,#progress{display:none}main{margin:0}.case .stage.hidden,.qz .exp{display:block!important}details.rq{break-inside:avoid}}
+
+:root[data-theme="dark"] .pearl .bt{color:#e5b35a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .pearl .bt{color:#e5b35a}}
+.hero svg.ecg{opacity:.28}
+
+.risk-bar{display:flex;height:14px;border-radius:999px;overflow:hidden;margin:10px 0 4px}
+.risk-bar span{flex:1}
+
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<button id="menuBtn" aria-controls="sidebar" aria-expanded="false">☰ Índice</button>
+<div id="scrim"></div>
+<div id="lightbox" role="dialog" aria-label="Imagen ampliada"><img alt=""></div>
+
+<nav class="sidebar" id="sidebar" aria-label="Índice">
+  <div class="sb-brand">
+    <span class="tag">MEDICINA INTERNA</span>
+    <h1>Riesgo cardiovascular global</h1>
+    <p>Guía de estudio · nivel residente</p>
+  </div>
+  <ul class="toc" id="toc">
+    <li class="lvl1"><a href="#s1">1. Introducción y fundamentos</a>
+      <ul>
+        <li><a href="#s1-1">1.1 Definiciones clave</a></li>
+        <li><a href="#s1-2">1.2 Epidemiología</a></li>
+        <li><a href="#s1-3">1.3 Factores de riesgo</a></li>
+        <li><a href="#s1-4">1.4 Fisiopatología de la aterosclerosis</a></li>
+      </ul></li>
+    <li class="lvl1"><a href="#s2">2. Evaluación y estratificación</a>
+      <ul>
+        <li><a href="#s2-1">2.1 Evaluación clínica</a></li>
+        <li><a href="#s2-2">2.2 Escalas de riesgo</a></li>
+        <li><a href="#s2-3">2.3 Algoritmo colombiano</a></li>
+        <li><a href="#s2-4">2.4 Reclasificación: imagen y biomarcadores</a></li>
+        <li><a href="#s2-5">2.5 Causas secundarias y diferenciales</a></li>
+      </ul></li>
+    <li class="lvl1"><a href="#s3">3. Intervención según el riesgo</a>
+      <ul>
+        <li><a href="#s3-1">3.1 Estilo de vida y Life's Essential 8</a></li>
+        <li><a href="#s3-2">3.2 Lípidos: metas y algoritmo</a></li>
+        <li><a href="#s3-3">3.3 PA, glucemia, peso, tabaco, antitrombóticos</a></li>
+        <li><a href="#s3-4">3.4 Paciente hospitalizado y post-evento</a></li>
+        <li><a href="#s3-5">3.5 Situaciones especiales y pronóstico</a></li>
+      </ul></li>
+    <li class="lvl1"><a href="#s4">4. High yield para el examen</a>
+      <ul>
+        <li><a href="#s4-1">4.1 Calculadoras interactivas</a></li>
+        <li><a href="#s4-2">4.2 Preguntas de ronda</a></li>
+        <li><a href="#s4-3">4.3 Casos clínicos</a></li>
+        <li><a href="#s4-4">4.4 Autoevaluación (quiz)</a></li>
+      </ul></li>
+    <li class="lvl1"><a href="#s5">5. Bibliografía</a></li>
+  </ul>
+  <div class="sb-tools">
+    <button id="themeBtn" type="button">◐ Tema</button>
+    <button id="printBtn" type="button">⎙ Imprimir</button>
+  </div>
+</nav>
+
+<main>
+<header class="hero">
+  <div class="eyebrow">MEDICINA INTERNA · PREVENCIÓN CARDIOVASCULAR</div>
+  <h1>Riesgo Cardiovascular Global</h1>
+  <p class="sub">Del factor de riesgo aislado a la probabilidad absoluta de enfermar: cómo estimarla en Colombia y cómo convertirla en decisiones terapéuticas</p>
+  <div class="chips">
+    <span>Consenso Colombiano de Dislipidemias 2024</span><span>AHA PREVENT</span><span>ESC SCORE2</span><span>Guía CKM 2026</span><span>Harrison 22.ª ed.</span>
+  </div>
+  <svg class="ecg" viewBox="0 0 1200 70" preserveAspectRatio="none" aria-hidden="true"><path fill="none" stroke="#fff" stroke-width="2.2" d="M0,64 C200,63 380,60 520,54 C660,48 760,40 840,30 C920,20 980,12 1040,8 C1100,5 1150,4 1200,3"/><path fill="none" stroke="#fff" stroke-width="1.4" stroke-dasharray="6 6" d="M0,66 C300,65 600,62 800,56 C960,51 1080,44 1200,38"/></svg>
+</header>
+<div class="wrap">
+
+<!-- ===================== SECCIÓN 1 ===================== -->
+<section class="sec" id="s1">
+ <div class="sec-head">
+  <span class="badge">Fundamentos</span>
+  <h2>1. Introducción y fundamentos</h2>
+  <p class="lead">Ningún factor de riesgo debe interpretarse solo: un LDL de 150 mg/dL significa cosas muy distintas en una mujer de 35 años sin otros factores y en un hombre diabético de 62 que fuma. El riesgo global integra todos los factores en una sola cifra que guía cuánto intervenir.</p>
+ </div>
+ <div class="sec-body">
+
+  <h3 class="sub" id="s1-1">1.1 Definiciones clave</h3>
+  <div class="tw"><table><thead><tr><th>Concepto</th><th>Definición</th><th>Por qué importa</th></tr></thead><tbody>
+   <tr><td><b>Riesgo cardiovascular global (absoluto)</b></td><td>Probabilidad de que una persona presente un evento cardiovascular aterosclerótico (IAM, muerte coronaria, ACV; en algunas escalas, también insuficiencia cardiaca) en un periodo definido, habitualmente <b>10 años</b>, considerando simultáneamente todos sus factores de riesgo</td><td>Determina la <b>intensidad</b> del tratamiento y las <b>metas</b>. El beneficio absoluto de cualquier intervención es proporcional al riesgo basal</td></tr>
+   <tr><td><b>Riesgo relativo</b></td><td>Cuántas veces más riesgo tiene una persona frente a otra sin el factor (p. ej., el fumador duplica su riesgo)</td><td>Útil para comunicar y motivar, sobre todo en jóvenes con riesgo absoluto bajo</td></tr>
+   <tr><td><b>Riesgo a 30 años / a lo largo de la vida</b></td><td>Probabilidad acumulada de evento hasta los 80–95 años o en 30 años</td><td>Revela a los adultos jóvenes con riesgo bajo a 10 años pero alto acumulado (PREVENT a 30 años, 30–59 años)</td></tr>
+   <tr><td><b>Edad vascular</b></td><td>Edad de una persona con factores de riesgo óptimos que tendría el mismo riesgo calculado</td><td>Herramienta de comunicación ("su corazón tiene 58 años")</td></tr>
+   <tr><td><b>Reducción absoluta del riesgo y NNT</b></td><td>RAR = riesgo basal × reducción relativa; NNT = 1/RAR</td><td>La misma estatina (↓ 22% por cada 39 mg/dL de LDL) evita muchos más eventos en quien parte de 20% que en quien parte de 2%</td></tr>
+   <tr><td><b>Niveles de prevención</b></td><td><b>Primordial</b>: evitar que aparezcan los factores de riesgo · <b>Primaria</b>: tratar factores en quien no ha tenido eventos · <b>Secundaria</b>: tras un evento clínico</td><td>La estratificación del riesgo es la herramienta de la prevención primaria</td></tr>
+  </tbody></table></div>
+
+  <div class="box pearl"><div class="bt">✦ La idea central: el beneficio depende del riesgo basal</div>
+   <p>Si una intervención reduce el riesgo relativo 25%: en un paciente con riesgo de 20% a 10 años la RAR es 5% (NNT 20); en uno con 4%, la RAR es 1% (NNT 100). Por eso el mismo LDL puede requerir estatina de alta intensidad en un paciente y solo cambios de estilo de vida en otro. <b>Se trata al paciente según su riesgo, no según la cifra aislada.</b></p>
+  </div>
+
+  <h4>Relación con el síndrome cardio-reno-metabólico (CKM)</h4>
+  <p>La guía AHA/ACC/ADA/ASN 2026 integra la estimación del riesgo en la estadificación CKM (0 a 4). Ambos se usan juntos: el <b>estadio CKM</b> describe dónde está el paciente en el continuo fisiopatológico (adiposidad ➔ factores metabólicos/ERC ➔ ECV subclínica ➔ ECV clínica), y la <b>categoría de riesgo</b> define metas de LDL y umbrales terapéuticos. Un paciente en estadio 1 puede ser de alto riesgo (p. ej., con Lp(a) muy elevada y enfermedad inflamatoria), y uno en estadio 2 puede tener riesgo bajo a 10 años pero alto a 30 años. Un <b>PREVENT a 10 años ≥20%</b> equivale a estadio 3.</p>
+
+  <h3 class="sub" id="s1-2">1.2 Epidemiología</h3>
+  <div class="cols3">
+   <div class="step"><div class="h">Mundo</div>La enfermedad cardiovascular es la <b>primera causa de muerte</b>: ≈ 20 millones de muertes al año, la mayoría por cardiopatía isquémica y ACV; más de tres cuartas partes en países de ingresos bajos y medios.</div>
+   <div class="step r"><div class="h">Colombia</div>La <b>cardiopatía isquémica</b> fue la primera causa de muerte en 2023: <b>45.465 defunciones (17,2%)</b> según el DANE (citado por el Consenso Colombiano de Dislipidemias 2024). La enfermedad cerebrovascular ocupa también los primeros lugares.</div>
+   <div class="step o"><div class="h">El problema del control</div>En la cohorte <b>PURE</b>, en países de ingresos medios la HTA, la dislipidemia y la DM están ampliamente subdiagnosticadas y subtratadas; menos de 1 de cada 5 pacientes en prevención secundaria recibe las tres clases de fármacos recomendadas.</div>
+  </div>
+  <ul class="dots">
+   <li>En EE. UU., cerca de <b>9 de cada 10 adultos</b> están en estadio CKM ≥1 y ≈ 15% en estadios avanzados 3–4 (NHANES 2011–2020).</li>
+   <li><b>INTERHEART</b> (52 países, incluida Latinoamérica): nueve factores modificables explican ≈ 90% del riesgo poblacional atribuible de IAM. <b>INTERSTROKE</b>: diez factores explican ≈ 90% del riesgo de ACV, con la HTA como principal.</li>
+   <li>Más del 80% de los eventos cardiovasculares prematuros son prevenibles con el control de los factores de riesgo.</li>
+  </ul>
+
+  <h3 class="sub" id="s1-3">1.3 Factores de riesgo</h3>
+  <div class="cols2">
+   <div class="tw"><table style="min-width:0"><thead><tr><th>Modificables (mayores)</th><th>Comentario</th></tr></thead><tbody>
+    <tr><td><b>Dislipidemia (LDL, no-HDL, apoB)</b></td><td>Factor <b>causal</b>: la exposición acumulada a lipoproteínas con apoB determina la carga aterosclerótica (concepto de "mg-año")</td></tr>
+    <tr><td><b>Hipertensión arterial</b></td><td>Primer factor de riesgo atribuible de muerte en el mundo; el riesgo se duplica cada 20/10 mmHg desde 115/75</td></tr>
+    <tr><td><b>Tabaquismo</b> (incluido vapeo y pasivo)</td><td>Duplica el riesgo; sin umbral seguro. El riesgo coronario baja a la mitad al año de dejar de fumar</td></tr>
+    <tr><td><b>Diabetes mellitus</b></td><td>Riesgo 2–4 veces mayor; con daño de órgano blanco se comporta como muy alto riesgo</td></tr>
+    <tr><td><b>Obesidad abdominal</b></td><td>Impulsa HTA, DM, dislipidemia aterogénica, inflamación y ERC (motor del síndrome CKM)</td></tr>
+    <tr><td><b>Enfermedad renal crónica</b></td><td>TFGe &lt;60 o albuminuria: riesgo CV mayor que el riesgo de llegar a diálisis</td></tr>
+    <tr><td>Sedentarismo y dieta no saludable</td><td>Ultraprocesados, sodio alto, poca fruta y verdura</td></tr>
+    <tr><td>Alcohol, estrés psicosocial, sueño insuficiente</td><td>Incluidos en INTERHEART y en Life's Essential 8 (sueño)</td></tr>
+   </tbody></table></div>
+   <div class="tw"><table style="min-width:0"><thead><tr><th>No modificables y potenciadores</th><th>Comentario</th></tr></thead><tbody>
+    <tr><td><b>Edad</b></td><td>El determinante individual más potente del riesgo absoluto a 10 años</td></tr>
+    <tr><td><b>Sexo masculino</b></td><td>En la mujer el riesgo se retrasa ≈ 10 años, pero se iguala tras la menopausia</td></tr>
+    <tr><td><b>Historia familiar de ECV prematura</b></td><td>Familiar de primer grado: hombre &lt;55 años, mujer &lt;65 años</td></tr>
+    <tr><td><b>Lipoproteína(a)</b></td><td>Determinada genéticamente (&gt;90%); medir <b>una vez en la vida</b></td></tr>
+    <tr><td>Hipercolesterolemia familiar</td><td>LDL ≥190 mg/dL desde la juventud; exposición acumulada muy alta</td></tr>
+    <tr><td>Enfermedades inflamatorias</td><td>Artritis reumatoide, LES, psoriasis, EII, VIH</td></tr>
+    <tr><td>Propios de la mujer</td><td>Preeclampsia, diabetes gestacional, parto pretérmino, menopausia precoz, SOP</td></tr>
+    <tr><td>Determinantes sociales</td><td>Pobreza multidimensional (≥5 privaciones DANE), inseguridad alimentaria, barreras de acceso</td></tr>
+   </tbody></table></div>
+  </div>
+
+  <h3 class="sub" id="s1-4">1.4 Fisiopatología de la aterosclerosis</h3>
+  <p>La aterosclerosis es una enfermedad <b>inflamatoria crónica</b> de la íntima arterial iniciada por la retención de lipoproteínas que contienen <b>apolipoproteína B</b> (LDL, VLDL remanentes, Lp(a)). Cada partícula aterogénica tiene una sola apoB: por eso la apoB mide el número de partículas y el no-HDL su contenido de colesterol.</p>
+  <div class="box algo"><div class="bt">⟶ De la partícula de LDL al infarto</div>
+   <div class="flow">
+    <div class="node"><b>1. Disfunción endotelial</b>HTA, tabaco, hiperglucemia, flujo turbulento (bifurcaciones) ⇒ ↓ óxido nítrico, ↑ permeabilidad y moléculas de adhesión (VCAM-1).</div>
+    <div class="arrow">➔</div>
+    <div class="node o"><b>2. Retención y modificación</b>Las partículas con apoB entran a la íntima, se unen a proteoglicanos y se <b>oxidan</b>. A mayor concentración y tiempo, mayor retención.</div>
+    <div class="arrow">➔</div>
+    <div class="node p"><b>3. Inflamación</b>Monocitos ⇒ macrófagos que captan LDL oxidada (receptores scavenger) ⇒ <b>células espumosas</b> ⇒ estría grasa. Inflamasoma NLRP3, IL-1β, IL-6.</div>
+    <div class="arrow">➔</div>
+    <div class="node"><b>4. Fibroateroma</b>Migración de músculo liso, capa fibrosa de colágeno sobre un <b>núcleo necrótico</b> lipídico; calcificación (base del CAC).</div>
+    <div class="arrow">➔</div>
+    <div class="node r"><b>5. Evento</b><b>Ruptura</b> de una placa vulnerable (capa delgada &lt;65 µm, núcleo grande, inflamación) o <b>erosión</b> ⇒ trombosis ⇒ SCA o ACV.</div>
+   </div>
+  </div>
+  <div class="cols2">
+   <div class="step o"><div class="h">Causalidad del LDL: la exposición acumulada</div>Estudios genéticos (aleatorización mendeliana), epidemiológicos y ensayos clínicos convergen: el LDL causa aterosclerosis de forma dosis- y tiempo-dependiente. <b>Cada 1 mmol/L (≈ 39 mg/dL) menos de LDL reduce ≈ 22% los eventos vasculares mayores</b> (Cholesterol Treatment Trialists), sin umbral inferior identificado. Bajar el LDL más temprano y por más tiempo produce un beneficio mayor.</div>
+   <div class="step p"><div class="h">Riesgo residual</div>Aun con LDL en meta persisten eventos por: <b>lipoproteínas ricas en triglicéridos</b> (remanentes), <b>Lp(a)</b> (proaterogénica, proinflamatoria y protrombótica), <b>inflamación</b> (PCR ultrasensible ≥2 mg/L; base de colchicina y canakinumab), HTA, DM y tabaco no controlados.</div>
+  </div>
+  <div class="box pearl"><div class="bt">✦ Lo esencial para el examen</div>
+   <ul class="dots">
+    <li>Los factores de riesgo <b>se multiplican, no se suman</b>: un paciente con tres factores "moderadamente" elevados puede tener más riesgo que uno con un solo factor muy alto. Por eso existen las escalas.</li>
+    <li>Con hipertrigliceridemia, DM, obesidad o síndrome metabólico, el LDL subestima la carga aterogénica: usar <b>no-HDL o apoB</b>.</li>
+    <li>La placa vulnerable que causa el infarto suele <b>no ser</b> la más estenótica: la estenosis no predice bien la ruptura, y la prevención actúa sobre todas las placas.</li>
+   </ul>
+  </div>
+ </div>
+</section>
+<!-- ===================== SECCIÓN 2 ===================== -->
+<section class="sec" id="s2">
+ <div class="sec-head">
+  <span class="badge">Evaluación y estratificación</span>
+  <h2>2. Evaluación clínica y estratificación del riesgo</h2>
+  <p class="lead">Secuencia práctica: identificar a quienes ya son de alto o muy alto riesgo por criterios clínicos; en el resto, calcular el riesgo con una escala adecuada a la población; luego reclasificar con potenciadores, imagen o biomarcadores cuando haya duda.</p>
+ </div>
+ <div class="sec-body">
+
+  <h3 class="sub" id="s2-1">2.1 Evaluación clínica</h3>
+  <div class="cols3">
+   <div class="step"><div class="h">Historia clínica dirigida</div>
+    <ul class="dots" style="margin:0">
+     <li>ECV personal (IAM, ACV/AIT, EAP, revascularización, IC, FA).</li>
+     <li>ECV prematura familiar (H &lt;55, M &lt;65 años), HF, muerte súbita.</li>
+     <li>Tabaco (paquetes-año), vapeo, alcohol, actividad física, dieta, sueño, ronquido.</li>
+     <li>Preeclampsia, DM gestacional, menopausia precoz, SOP.</li>
+     <li>Enfermedades inflamatorias, VIH, cáncer y cardiotóxicos.</li>
+     <li>Fármacos: corticoides, antipsicóticos, antirretrovirales, AINE.</li>
+     <li>Disfunción eréctil (marcador precoz de enfermedad vascular).</li>
+     <li>Determinantes sociales.</li>
+    </ul></div>
+   <div class="step o"><div class="h">Examen físico</div>
+    <ul class="dots" style="margin:0">
+     <li>PA con técnica estandarizada (promedio de 2 lecturas) y pulso irregular.</li>
+     <li>Peso, talla, IMC y <b>perímetro abdominal</b>.</li>
+     <li><b>Xantomas tendinosos</b> (Aquiles, extensores), xantelasmas, <b>arco corneal antes de los 45 años</b> (sugieren HF).</li>
+     <li>Acantosis nigricans.</li>
+     <li>Pulsos, soplos carotídeos y femorales; <b>índice tobillo-brazo</b> si hay sospecha de EAP.</li>
+     <li>Signos de IC.</li>
+    </ul></div>
+   <div class="step p"><div class="h">Paraclínicos</div>
+    <ul class="dots" style="margin:0">
+     <li><b>Perfil lipídico</b>: CT, HDL, TG, LDL (calculado o directo), <b>no-HDL</b>. No requiere ayuno salvo TG &gt;400.</li>
+     <li><b>ApoB</b> si TG altos, DM, obesidad o LDL muy bajo.</li>
+     <li><b>Lp(a) una vez en la vida</b>.</li>
+     <li>Glucemia en ayunas y/o HbA1c.</li>
+     <li>Creatinina con TFGe CKD-EPI 2021 y <b>UACR</b>.</li>
+     <li>TSH si dislipidemia nueva; transaminasas.</li>
+     <li>ECG en HTA o DM.</li>
+    </ul></div>
+  </div>
+
+  <div class="box algo"><div class="bt">⟶ Secuencia de estratificación (todas las guías coinciden en el orden)</div>
+   <div class="flow">
+    <div class="node r"><b>1. ¿Prevención secundaria?</b>ECV aterosclerótica clínica ⇒ muy alto riesgo. No se calcula escala.</div>
+    <div class="arrow">➔</div>
+    <div class="node o"><b>2. ¿Condición de alto riesgo?</b>DM con daño de órgano, ERC moderada-grave, HF, LDL ≥190, PA ≥180/110, aterosclerosis subclínica significativa.</div>
+    <div class="arrow">➔</div>
+    <div class="node"><b>3. Calcular el riesgo</b>Escala validada o calibrada para la población (en Colombia: PCE ajustadas; PREVENT con cautela).</div>
+    <div class="arrow">➔</div>
+    <div class="node g"><b>4. Reclasificar</b>Potenciadores, CAC, ITB, Lp(a), PCR, preferencias del paciente: decisión compartida.</div>
+   </div>
+  </div>
+
+  <h3 class="sub" id="s2-2">2.2 Escalas de riesgo: cuál usar y por qué</h3>
+  <div class="tw"><table><caption>Comparación de las principales escalas</caption><thead><tr><th>Escala</th><th>Población de derivación</th><th>Desenlace</th><th>Variables</th><th>Comentario para Colombia</th></tr></thead><tbody>
+   <tr><td><b>Framingham (D'Agostino 2008)</b></td><td>Framingham, EE. UU.</td><td>ECV general a 10 años</td><td>Edad, sexo, CT, HDL, PAS (tratada o no), tabaco, DM</td><td>La GPC del MinSalud 2014 recomendaba multiplicarla por <b>0,75</b> (sobrestimaba el riesgo en colombianos). Superada por el consenso 2024</td></tr>
+   <tr><td><b>Pooled Cohort Equations (PCE/ASCVD, 2013)</b></td><td>Cohortes estadounidenses (blancos y afroamericanos)</td><td>ASCVD duro a 10 años (IAM, muerte coronaria, ACV)</td><td>Edad, sexo, raza, CT, HDL, PAS, tratamiento antihipertensivo, tabaco, DM</td><td>Validadas en <b>PURE-Colombia</b>: sobrestiman. Ajuste del consenso 2024: <b>hombres × 0,28, mujeres × 0,54</b></td></tr>
+   <tr><td><b>PREVENT (AHA 2023–2024)</b></td><td>&gt;6 millones de adultos en EE. UU.</td><td>ECV total = ASCVD + <b>insuficiencia cardiaca</b>, a 10 y 30 años</td><td>Edad (desde 30), sexo, CT, HDL, PAS, tratamientos, tabaco, DM, <b>TFGe</b>, IMC; opcionales: UACR, HbA1c, índice de privación social. <b>No usa raza</b></td><td>Adoptada por la guía CKM 2026 y la guía de HTA AHA/ACC 2025. Da cifras ≈ la mitad que las PCE; <b>no validada aún en Colombia</b></td></tr>
+   <tr><td><b>SCORE2 / SCORE2-OP</b> (ESC 2021)</td><td>Europa, calibrada por regiones de riesgo</td><td>Eventos CV fatales y no fatales a 10 años</td><td>Edad, sexo, tabaco, PAS, no-HDL</td><td>40–69 años (SCORE2) y ≥70 años (SCORE2-OP); umbrales dependientes de la edad. No calibrada para Latinoamérica</td></tr>
+   <tr><td>SCORE2-Diabetes (ESC 2023)</td><td>Europa</td><td>Igual que SCORE2</td><td>Añade edad al diagnóstico de DM, HbA1c y TFGe</td><td>Para DM2 sin ECV ni daño de órgano grave</td></tr>
+   <tr><td><b>Tablas OMS/OPS (2019)</b></td><td>Recalibradas para 21 regiones del mundo</td><td>Eventos CV a 10 años</td><td>Versión de laboratorio (CT, DM) o sin laboratorio (IMC)</td><td>Disponibles para la región andina; base de la iniciativa <b>HEARTS</b> en atención primaria</td></tr>
+   <tr><td>QRISK3</td><td>Reino Unido</td><td>ECV a 10 años</td><td>Incluye etnia, ERC, AR, LES, migraña, antipsicóticos, disfunción eréctil</td><td>No validada en Colombia</td></tr>
+  </tbody></table></div>
+
+  <div class="box alert"><div class="bt">⚠ Por qué no se puede usar cualquier escala sin calibrar</div>
+   <p>Una escala derivada en una población con mayor incidencia de eventos <b>sobrestima</b> el riesgo cuando se aplica a otra con menor incidencia, y viceversa. La validación externa en <b>PURE-Colombia</b> (López-López y cols., 2024) comparó seis modelos y encontró sobrestimación de las PCE en colombianos; de ahí los factores de corrección del consenso nacional. Ninguna escala debe usarse de forma aislada: es un punto de partida para la decisión compartida.</p>
+  </div>
+
+  <div class="tw"><table><caption>Umbrales de PREVENT que cambian decisiones (guía CKM 2026 y HTA 2025)</caption><thead><tr><th>Umbral</th><th>Decisión</th></tr></thead><tbody>
+   <tr><td><b>PREVENT-CVD a 10 años ≥20%</b></td><td>Equivalente de estadio CKM 3 aunque no haya ECV subclínica demostrada</td></tr>
+   <tr><td><b>PREVENT-CVD a 10 años ≥7,5%</b></td><td>HTA estadio 1 (130–139/80–89): iniciar fármaco además del estilo de vida. DM2 en estadio 2–3: iSGLT2 o GLP-1 con beneficio CV</td></tr>
+   <tr><td>PREVENT-HF a 10 años ≥5%</td><td>Razonable medir NT-proBNP/BNP o troponina para buscar pre-insuficiencia cardiaca</td></tr>
+   <tr><td>Riesgo limítrofe–intermedio con incertidumbre</td><td>Calcio arterial coronario (CAC) para decidir la estatina</td></tr>
+   <tr><td>Riesgo a 30 años (30–59 años)</td><td>Identifica adultos jóvenes con riesgo acumulado alto pese a un riesgo bajo a 10 años</td></tr>
+  </tbody></table></div>
+
+  <h3 class="sub" id="s2-3">2.3 Algoritmo colombiano de cuatro pasos (Consenso Colombiano de Dislipidemias 2024)</h3>
+  <p>El consenso (Clase I, nivel B) clasifica a la mayoría de los pacientes con <b>criterios clínicos</b> y reserva el cálculo de las PCE ajustadas para quienes no quedan clasificados.</p>
+  <div class="box algo"><div class="bt">⟶ Algoritmo de estratificación</div>
+   <div class="vflow">
+    <div class="step r"><div class="h">Paso 1 — MUY ALTO riesgo (clasificación automática)</div>
+     <ul class="dots" style="margin:0">
+      <li>ECV aterosclerótica clínica establecida.</li>
+      <li>Aterosclerosis subclínica con placas ≥50% o con características de vulnerabilidad.</li>
+      <li>HF homocigota, o heterocigota + un factor de riesgo mayor.</li>
+      <li>ERC con TFGe ≤30 mL/min/1,73 m².</li>
+      <li>DM con daño de órgano blanco, ≥3 factores de riesgo adicionales o larga duración.</li>
+     </ul>
+     <p style="margin:6px 0 0"><b>Meta:</b> LDL &lt;55 mg/dL y reducción ≥50% · no-HDL &lt;85 · apoB &lt;65</p></div>
+    <div class="arrow">➔</div>
+    <div class="step o"><div class="h">Paso 2 — ALTO riesgo</div>
+     <ul class="dots" style="margin:0">
+      <li>Múltiples factores de riesgo cardiovascular.</li>
+      <li>Aterosclerosis subclínica con lesiones &lt;50%; CAC ≥100 UA o &gt; percentil 75.</li>
+      <li>Lp(a) &gt;180 mg/dL (≈ 430 nmol/L).</li>
+      <li>Un factor marcadamente elevado: PA ≥180/110, LDL &gt;190 o CT &gt;310 mg/dL.</li>
+      <li>DM + un factor adicional y &gt;10 años de duración.</li>
+      <li>HF heterocigota sin otros factores.</li>
+      <li>ERC con TFGe 30–60.</li>
+     </ul>
+     <p style="margin:6px 0 0"><b>Meta:</b> LDL &lt;70 mg/dL y/o reducción ≥50% · no-HDL &lt;100 · apoB &lt;80</p></div>
+    <div class="arrow">➔</div>
+    <div class="step"><div class="h">Paso 3 — Potenciadores: 1–2 = MODERADO · ≥3 = ALTO</div>
+     <p style="margin:0">Inflamatorios (VIH, AR, psoriasis, EII…) · Familiares (ECV prematura) · Clínicos (ITB &lt;0,9) · Biomarcadores (Lp(a) ≥50 mg/dL o ≥125 nmol/L, PCR ≥2 mg/L, apoB ≥130 mg/dL, UACR &gt;30 mg/g) · Propios de la mujer (preeclampsia, DM gestacional, insuficiencia ovárica o menopausia precoz) · DM sin factores asociados y &lt;10 años de evolución · Sociales (pobreza multidimensional ≥5 privaciones DANE).</p>
+     <p style="margin:6px 0 0"><b>Meta riesgo moderado:</b> LDL &lt;100 · no-HDL &lt;130 · apoB &lt;100</p></div>
+    <div class="arrow">➔</div>
+    <div class="step g"><div class="h">Paso 4 — Si persiste la duda: PCE a 10 años ajustadas para Colombia</div>
+     <p style="margin:0">Hombres × 0,28 · mujeres × 0,54. Resultado: <b>&gt;20% alto</b> · <b>5–20% moderado</b> · <b>&lt;5% bajo</b>.</p>
+     <p style="margin:6px 0 0"><b>Meta riesgo bajo:</b> LDL &lt;116 · no-HDL &lt;150 · apoB &lt;100</p></div>
+   </div>
+  </div>
+
+  <div class="tw"><table><caption>Metas lipídicas por categoría (Consenso Colombiano 2024; TG &lt;150 mg/dL en todas)</caption><thead><tr><th>Categoría</th><th>LDL-C</th><th>No-HDL</th><th>ApoB</th></tr></thead><tbody>
+   <tr><td><b style="color:var(--red)">Muy alto</b></td><td>&lt;55 mg/dL y ↓ ≥50%</td><td>&lt;85 mg/dL</td><td>&lt;65 mg/dL</td></tr>
+   <tr><td><b style="color:#d35400">Alto</b></td><td>&lt;70 mg/dL y/o ↓ ≥50%</td><td>&lt;100 mg/dL</td><td>&lt;80 mg/dL</td></tr>
+   <tr><td><b style="color:#b07a12">Moderado</b></td><td>&lt;100 mg/dL</td><td>&lt;130 mg/dL</td><td>&lt;100 mg/dL</td></tr>
+   <tr><td><b style="color:#1e8449">Bajo</b></td><td>&lt;116 mg/dL</td><td>&lt;150 mg/dL</td><td>&lt;100 mg/dL</td></tr>
+   <tr><td colspan="4" class="small">Guía CKM 2026: estadio 3 con CAC 100–999 ⇒ LDL &lt;70; CAC ≥1.000 ⇒ &lt;55; estadio 4 con ASCVD ⇒ &lt;55. ESC/EAS: en quienes tienen un segundo evento en 2 años pese a tratamiento máximo, considerar LDL &lt;40 mg/dL.</td></tr>
+  </tbody></table></div>
+
+  <h3 class="sub" id="s2-4">2.4 Reclasificación: imagen y biomarcadores</h3>
+  <div class="tw"><table><thead><tr><th>Herramienta</th><th>Cuándo</th><th>Interpretación y consecuencia</th></tr></thead><tbody>
+   <tr><td><b>Calcio arterial coronario (CAC, Agatston)</b></td><td>Riesgo limítrofe o intermedio con incertidumbre para iniciar estatina (IIa)</td><td><b>CAC 0</b>: puede diferirse la estatina en algunos casos (salvo DM, tabaquismo activo, historia familiar fuerte, ERC); repetir en 3–7 años. <b>1–99</b>: favorece estatina, sobre todo ≥55 años. <b>≥100 o &gt; p75</b>: alto riesgo, iniciar estatina. <b>≥1.000</b>: comportamiento similar a prevención secundaria. Los hallazgos de calcificación en TC de tórax (p. ej., tamizaje de cáncer de pulmón) también cuentan</td></tr>
+   <tr><td><b>Placa carotídea o femoral</b> (ecografía)</td><td>Alternativa al CAC cuando no está disponible</td><td>Placa ≥50% o vulnerable ⇒ muy alto riesgo; &lt;50% ⇒ alto riesgo (algoritmo colombiano). El grosor íntima-media aislado ya no se recomienda</td></tr>
+   <tr><td><b>Índice tobillo-brazo</b></td><td>Sospecha de EAP, fumadores, DM</td><td>&lt;0,9 = EAP (potenciador; si sintomática, ECV clínica). &gt;1,4 = arterias no compresibles</td></tr>
+   <tr><td><b>Lp(a)</b></td><td>Una vez en la vida en todo adulto</td><td>≥50 mg/dL (125 nmol/L) potenciador; &gt;180 mg/dL (430 nmol/L) alto riesgo. Tamizaje en cascada familiar</td></tr>
+   <tr><td><b>ApoB</b></td><td>TG altos, DM, obesidad, síndrome metabólico</td><td>≥130 mg/dL potenciador; meta según categoría. Mide el número de partículas aterogénicas</td></tr>
+   <tr><td>PCR ultrasensible</td><td>Duda en riesgo intermedio</td><td>≥2 mg/L (en ausencia de infección o inflamación aguda) potenciador</td></tr>
+   <tr><td>UACR</td><td>HTA, DM, ERC, obesidad</td><td>&gt;30 mg/g potenciador y marcador de ERC</td></tr>
+   <tr><td>NT-proBNP / troponina ultrasensible</td><td>PREVENT-HF ≥5%</td><td>NT-proBNP ≥125 pg/mL o troponina &gt; p99 ⇒ pre-IC (estadio CKM 3)</td></tr>
+  </tbody></table></div>
+  <div class="cols2">
+   <div><div class="ph"><span class="ic">🩻</span><b>[Imagen: TC sin contraste — calcio coronario en descendente anterior]</b>Insertar imagen aquí</div>
+    <p class="small" style="margin-top:8px">Depósitos hiperdensos (&gt;130 UH) en el trayecto coronario. El puntaje de Agatston integra área y densidad. Dosis de radiación baja (≈ 1 mSv), sin contraste.</p></div>
+   <div><div class="ph"><span class="ic">🩺</span><b>[Imagen: ecografía carotídea con placa ateromatosa en el bulbo]</b>Insertar imagen aquí</div>
+    <p class="small" style="margin-top:8px">Engrosamiento focal ≥1,5 mm que protruye hacia la luz. Las placas hipoecoicas, ulceradas o con hemorragia intraplaca son vulnerables.</p></div>
+  </div>
+
+  <h3 class="sub" id="s2-5">2.5 Causas secundarias, hipercolesterolemia familiar y diagnósticos diferenciales</h3>
+  <div class="tw"><table><caption>Causas secundarias de dislipidemia que deben descartarse antes de iniciar tratamiento</caption><thead><tr><th>Causa</th><th>Patrón lipídico</th><th>Clave diagnóstica</th></tr></thead><tbody>
+   <tr><td><b>Hipotiroidismo</b></td><td>↑ LDL (↓ receptores de LDL)</td><td>TSH; corregir antes de etiquetar intolerancia a estatinas</td></tr>
+   <tr><td><b>Síndrome nefrótico</b></td><td>↑ LDL y TG</td><td>Proteinuria &gt;3,5 g/día, hipoalbuminemia, edema</td></tr>
+   <tr><td>Colestasis</td><td>↑ LDL (lipoproteína X)</td><td>Fosfatasa alcalina, bilirrubina</td></tr>
+   <tr><td><b>DM2 descompensada / resistencia a la insulina</b></td><td>↑ TG, ↓ HDL, LDL pequeñas y densas</td><td>HbA1c, perímetro abdominal</td></tr>
+   <tr><td><b>Alcohol</b></td><td>↑ TG</td><td>Historia, GGT</td></tr>
+   <tr><td>ERC</td><td>↑ TG, ↓ HDL</td><td>TFGe, UACR</td></tr>
+   <tr><td><b>Fármacos</b></td><td>Variable</td><td>Corticoides, antipsicóticos atípicos, antirretrovirales (inhibidores de proteasa), isotretinoína, ciclosporina, tiazidas a dosis altas, estrógenos orales (↑ TG), betabloqueadores no selectivos</td></tr>
+   <tr><td>Embarazo</td><td>↑ LDL y TG fisiológicos</td><td>No tratar con estatinas</td></tr>
+  </tbody></table></div>
+
+  <div class="box alert"><div class="bt">⚠ Hipercolesterolemia familiar (HF): no la deje pasar</div>
+   <p>Sospechar si <b>LDL ≥190 mg/dL</b> en adultos (≥160 en niños), xantomas tendinosos, arco corneal antes de los 45 años o ECV prematura personal o familiar. Herencia autosómica dominante (mutaciones en LDLR, APOB, PCSK9); prevalencia de la forma heterocigota ≈ 1/250–1/300. Diagnóstico clínico con los <b>criterios de la Red de Clínicas Lipídicas Holandesas</b> (calculadora en 4.1). Implicaciones: estatina de alta intensidad desde el diagnóstico (no se calcula escala), metas de alto o muy alto riesgo, y <b>tamizaje en cascada</b> de familiares de primer grado.</p>
+  </div>
+
+  <div class="tw"><table><caption>Diagnóstico diferencial: situaciones que sesgan la estimación del riesgo</caption><thead><tr><th>Situación</th><th>Efecto sobre la escala</th><th>Qué hacer</th></tr></thead><tbody>
+   <tr><td>Paciente ya en estatina o antihipertensivos</td><td>Las PCE usan valores actuales y subestiman el riesgo basal (PREVENT incorpora el uso de estatina)</td><td>Usar valores previos al tratamiento si se conocen</td></tr>
+   <tr><td>Jóvenes &lt;40 años</td><td>Riesgo a 10 años siempre bajo por la edad</td><td>Riesgo a 30 años, edad vascular, potenciadores</td></tr>
+   <tr><td>Hipertrigliceridemia / DM</td><td>El LDL subestima la carga aterogénica</td><td>No-HDL y apoB</td></tr>
+   <tr><td>Enfermedades inflamatorias, VIH, cáncer, post-trasplante</td><td>Las escalas subestiman</td><td>Considerar potenciadores (en AR, algunas guías multiplican × 1,5)</td></tr>
+   <tr><td>Población distinta a la de derivación</td><td>Sobrestimación o subestimación</td><td>Escala calibrada localmente (PCE ajustadas en Colombia)</td></tr>
+   <tr><td>Ancianos ≥75–80 años</td><td>La edad domina el cálculo; competencia de mortalidad</td><td>Decisión individual: fragilidad, expectativa de vida, CAC, preferencias</td></tr>
+  </tbody></table></div>
+ </div>
+</section>
+<!-- ===================== SECCIÓN 3 ===================== -->
+<section class="sec" id="s3">
+ <div class="sec-head">
+  <span class="badge">Intervención</span>
+  <h2>3. Intervención según el riesgo</h2>
+  <p class="lead">La intensidad de cada intervención crece con el riesgo absoluto. El estilo de vida está en todas las categorías; los fármacos se añaden según la categoría y las metas. Niveles: <span class="badge ev g">Clase I</span> <span class="badge ev b">IIa</span> <span class="badge ev">IIb</span> <span class="badge ev r">III</span>.</p>
+ </div>
+ <div class="sec-body">
+
+  <h3 class="sub" id="s3-1">3.1 Estilo de vida y Life's Essential 8</h3>
+  <p>La AHA define la salud cardiovascular con ocho métricas (Life's Essential 8). Mejorar el puntaje se asocia con menor incidencia de ECV y mayor expectativa de vida libre de enfermedad. Es la base de la prevención primordial (estadio CKM 0) y acompaña a todas las demás.</p>
+  <div class="tw"><table><thead><tr><th>Métrica</th><th>Meta óptima</th><th>Intervención y efecto esperado</th></tr></thead><tbody>
+   <tr><td><b>1. Alimentación</b></td><td>Patrón DASH o mediterráneo</td><td>Frutas, verduras, leguminosas, integrales, frutos secos, aceite de oliva, pescado; poco ultraprocesado, azúcar, grasa saturada (&lt;10% de calorías) y trans. PREDIMED: ↓ ≈ 30% eventos CV</td></tr>
+   <tr><td><b>2. Actividad física</b></td><td>150–300 min/semana moderada o 75–150 vigorosa + fuerza 2 días</td><td>Fraccionable en bloques; reducir el tiempo sentado. ↓ PA 5–8 mmHg, ↑ HDL, ↓ TG</td></tr>
+   <tr><td><b>3. Nicotina</b></td><td>Cero (incluido vapeo y pasivo)</td><td>La intervención individual más costo-efectiva. Ver 3.3</td></tr>
+   <tr><td><b>4. Sueño</b></td><td>7–9 horas por noche</td><td>Tamizar apnea obstructiva (STOP-BANG)</td></tr>
+   <tr><td><b>5. Peso</b></td><td>IMC 18,5–24,9; cintura normal</td><td>Pérdida de 5–10% mejora PA, glucemia, TG; ≥10–15% modifica la enfermedad (HFpEF, apnea, MASLD)</td></tr>
+   <tr><td><b>6. Lípidos</b></td><td>No-HDL &lt;130 mg/dL</td><td>La dieta reduce el LDL 5–15%; los fitoesteroles (2 g/día) ≈ 8–10%</td></tr>
+   <tr><td><b>7. Glucemia</b></td><td>Ayunas &lt;100 mg/dL o HbA1c &lt;5,7%</td><td>La intervención intensiva en prediabetes reduce 58% la progresión a DM (DPP)</td></tr>
+   <tr><td><b>8. Presión arterial</b></td><td>&lt;120/80 mmHg</td><td>Sodio &lt;2 g/día (o reducir ≥1 g), potasio dietario, alcohol bajo</td></tr>
+  </tbody></table></div>
+  <div class="box pearl"><div class="bt">✦ Consejería breve: las 5 A</div><p><b>Averiguar</b> (preguntar por el hábito), <b>Aconsejar</b> (mensaje claro y personalizado), <b>Acordar</b> (meta concreta y alcanzable), <b>Ayudar</b> (herramientas, fármacos, remisión a nutrición o rehabilitación) y <b>Arreglar</b> el seguimiento. Sirve para tabaco, alimentación, actividad física y adherencia.</p></div>
+
+  <h3 class="sub" id="s3-2">3.2 Lípidos: metas, fármacos y algoritmo</h3>
+  <div class="pillars">
+   <div class="pillar" style="background:var(--navy2)"><div class="n">Estatina</div><small>Alta intensidad ↓ &gt;50%<br>Moderada ↓ 30–50%</small></div>
+   <div class="pillar" style="background:var(--blue2)"><div class="n">+ Ezetimiba</div><small>↓ adicional 18–25%<br>IMPROVE-IT</small></div>
+   <div class="pillar" style="background:var(--terra)"><div class="n">+ iPCSK9</div><small>↓ adicional ≈ 60%<br>FOURIER, ODYSSEY</small></div>
+   <div class="pillar" style="background:#7a5a0e"><div class="n">Alternativas</div><small>Inclisirán, ácido bempedoico, icosapento, fibratos</small></div>
+  </div>
+
+  <div class="box algo"><div class="bt">⟶ Escalera terapéutica hipolipemiante</div>
+   <div class="vflow">
+    <div class="step"><div class="h">Escalón 1 — Estilo de vida + estatina según el riesgo</div>Alta intensidad en alto y muy alto riesgo (atorvastatina 40–80 mg o rosuvastatina 20–40 mg); moderada en riesgo moderado si no se alcanza la meta con estilo de vida. En muy alto riesgo con LDL muy lejos de la meta, considerar la combinación con ezetimiba desde el inicio.</div>
+    <div class="arrow">➔</div>
+    <div class="step o"><div class="h">Control a las 4–6 semanas</div>Perfil lipídico, adherencia, tolerancia, transaminasas si hay síntomas. Calcular el porcentaje de reducción alcanzado.</div>
+    <div class="arrow">➔</div>
+    <div class="step"><div class="h">Escalón 2 — Añadir ezetimiba 10 mg</div>Si no se alcanza la meta con la estatina máxima tolerada (preferir combinación fija).</div>
+    <div class="arrow">➔</div>
+    <div class="step p"><div class="h">Escalón 3 — iPCSK9 o inclisirán</div>Alto o muy alto riesgo persistentemente fuera de meta; HF.</div>
+    <div class="arrow">➔</div>
+    <div class="branch">
+     <div class="step g"><div class="h">Intolerancia a estatinas</div>Reintentar otra estatina o dosis alternas; ácido bempedoico (CLEAR Outcomes), ezetimiba, iPCSK9.</div>
+     <div class="step r"><div class="h">TG residuales</div>TG 150–499 con LDL controlado y ECV o DM + factor: icosapento de etilo (REDUCE-IT). TG ≥500: prevenir pancreatitis (dieta, fibrato).</div>
+    </div>
+   </div>
+  </div>
+
+  <div class="tw"><table><caption>Vademécum hipolipemiante</caption><thead><tr><th>Fármaco</th><th>Dosis</th><th>Mecanismo / efecto</th><th>Efectos adversos y contraindicaciones</th><th>Ajuste renal / hepático</th></tr></thead><tbody>
+   <tr><td><b>Atorvastatina</b></td><td>Alta: 40–80 mg · moderada: 10–20 mg</td><td rowspan="2">Inhiben la HMG-CoA reductasa ⇒ ↑ receptores de LDL hepáticos. Efectos pleiotrópicos antiinflamatorios</td><td rowspan="2">Mialgias (síntomas atribuibles reales en &lt;5–10%), miopatía y rabdomiólisis (rara), ↑ transaminasas leve, ↑ riesgo de DM en predispuestos (el beneficio CV lo supera). <b>Contraindicadas en embarazo y lactancia</b> y en hepatopatía descompensada</td><td>Atorvastatina: sin ajuste renal. Rosuvastatina: TFGe &lt;30 máx. 10 mg; dosis menores en asiáticos</td></tr>
+   <tr><td><b>Rosuvastatina</b></td><td>Alta: 20–40 mg · moderada: 5–10 mg</td><td>Las estatinas son seguras en MASLD</td></tr>
+   <tr><td>Simvastatina / pravastatina / lovastatina</td><td>20–40 / 40–80 / 40 mg (moderada intensidad)</td><td>Estatinas de moderada intensidad</td><td>Simvastatina: interacciones por CYP3A4 (claritromicina, azoles, amiodarona, diltiazem); no superar 40 mg</td><td>Pravastatina: menos interacciones (útil en VIH, trasplante)</td></tr>
+   <tr><td><b>Ezetimiba</b></td><td>10 mg/día</td><td>Inhibe NPC1L1 intestinal ⇒ ↓ absorción de colesterol; ↓ LDL 18–25% adicional</td><td>Bien tolerada</td><td>Sin ajuste renal; evitar en hepatopatía moderada-grave</td></tr>
+   <tr><td><b>Evolocumab / alirocumab</b> (iPCSK9)</td><td>140 mg SC c/2 semanas o 420 mg/mes / 75–150 mg SC c/2 semanas</td><td>Anticuerpos contra PCSK9 ⇒ menos degradación de receptores de LDL; ↓ LDL ≈ 60%, ↓ Lp(a) ≈ 25%</td><td>Reacciones en el sitio de inyección; reducen eventos (FOURIER, ODYSSEY OUTCOMES)</td><td>Sin ajuste</td></tr>
+   <tr><td>Inclisirán</td><td>284 mg SC día 0, mes 3 y luego c/6 meses</td><td>ARN pequeño de interferencia que silencia la síntesis hepática de PCSK9; ↓ LDL ≈ 50%</td><td>Beneficio en eventos en evaluación (ensayos en curso); facilita la adherencia</td><td>Sin ajuste en ERC leve-moderada</td></tr>
+   <tr><td>Ácido bempedoico</td><td>180 mg/día</td><td>Inhibe la ATP-citrato liasa (antes de la HMG-CoA reductasa); se activa en el hígado, no en el músculo; ↓ LDL 15–19%</td><td>Hiperuricemia, gota, colelitiasis. CLEAR Outcomes: ↓ 13% eventos en intolerantes a estatinas</td><td>Precaución en ERC avanzada</td></tr>
+   <tr><td>Icosapento de etilo</td><td>2 g c/12 h</td><td>EPA purificado; ↓ TG 20–33%</td><td>REDUCE-IT: ↓ 25% eventos en ECV o DM + factor, con estatina, TG ≥150 y LDL 40–100. ↑ riesgo de FA y sangrado</td><td>—</td></tr>
+   <tr><td>Fenofibrato</td><td>200 mg/día (micronizado) o ácido fenofíbrico 135 mg</td><td>Agonista PPAR-α; ↓ TG 25–50%</td><td>Indicado con TG &gt;500 mg/dL (prevención de pancreatitis). <b>No combinar estatina con gemfibrozilo</b> (miopatía)</td><td>Ajustar o evitar en ERC avanzada; ↑ creatinina reversible</td></tr>
+  </tbody></table></div>
+
+  <div class="box alert"><div class="bt">⚠ Errores frecuentes con las estatinas</div>
+   <ul class="dots">
+    <li>Suspenderlas por una elevación leve de transaminasas (&lt;3 veces el límite superior): no está indicado. En MASLD son seguras y el paciente muere más de causa CV que hepática.</li>
+    <li>Etiquetar "intolerancia" sin reintentar: descartar hipotiroidismo, déficit de vitamina D e interacciones; probar otra estatina, dosis menor o dosis alternas. En ensayos ciegos (SAMSON), ≈ 90% de los síntomas aparecían también con placebo (efecto nocebo).</li>
+    <li>No medir el perfil de control: sin perfil a las 4–6 semanas no se sabe si hay que escalar.</li>
+    <li>Calcular el LDL con Friedewald cuando los TG son &gt;400 mg/dL: pedir LDL directo, no-HDL o apoB (o usar la ecuación de Sampson/NIH).</li>
+   </ul>
+  </div>
+
+  <h3 class="sub" id="s3-3">3.3 Presión arterial, glucemia, peso, tabaco y antitrombóticos</h3>
+  <div class="tw"><table><thead><tr><th>Factor</th><th>Intervención según el riesgo</th><th>Evidencia</th></tr></thead><tbody>
+   <tr><td><b>Presión arterial</b></td><td>HTA estadio 2 (≥140/90): fármaco desde el inicio, idealmente 2 en una tableta. Estadio 1 (130–139/80–89) con ECV, DM, ERC o PREVENT ≥7,5%: fármaco + estilo de vida; con riesgo menor, 3–6 meses de estilo de vida. Meta &lt;130/80 (PAS 120–129 si se tolera)</td><td>AHA/ACC 2025, ESC 2024; SPRINT</td></tr>
+   <tr><td><b>Diabetes</b></td><td>Con PREVENT ≥7,5% o ≥50 años con factores CKM: <b>iSGLT2 o agonista GLP-1 con beneficio CV</b> independientemente de la HbA1c. GLP-1 si obesidad o MASLD; iSGLT2 si ERC o IC. Metformina como complemento</td><td>Guía CKM 2026; EMPA-REG, LEADER, SUSTAIN-6, CREDENCE</td></tr>
+   <tr><td><b>Obesidad</b></td><td>Meta inicial 5–10% de peso. IMC ≥27 con ECV: semaglutida 2,4 mg semanal (SELECT: ↓ 20% eventos CV mayores sin DM). Cirugía metabólica si IMC ≥35, o 30–34,9 con enfermedad metabólica no controlada</td><td>SELECT; ASMBS/IFSO 2022</td></tr>
+   <tr><td><b>ERC</b></td><td>IECA/ARA-II si albuminuria; iSGLT2; finerenona en DM2 con albuminuria</td><td>KDIGO 2024; DAPA-CKD, EMPA-KIDNEY, FIDELIO</td></tr>
+   <tr><td><b>Tabaco</b></td><td>Consejería + <b>vareniclina</b> (0,5 mg/día × 3 días ⇒ 0,5 mg c/12 h × 4 días ⇒ 1 mg c/12 h × 12 semanas), segura en cardiopatía; alternativas: TRN combinada, bupropión. El cigarrillo electrónico no es una estrategia recomendada de cesación en guías colombianas</td><td>EAGLES, EVITA</td></tr>
+   <tr><td><b>Aspirina en prevención primaria</b></td><td><b>No de rutina</b> <span class="badge ev r">III</span> en &gt;70 años o con riesgo de sangrado. Puede considerarse <span class="badge ev">IIb</span> en 40–70 años con riesgo CV alto y bajo riesgo de sangrado, tras decisión compartida</td><td>ASPREE, ARRIVE, ASCEND; USPSTF 2022</td></tr>
+   <tr><td>Colchicina</td><td>0,5 mg/día en enfermedad coronaria crónica con riesgo inflamatorio residual (prevención secundaria) <span class="badge ev b">IIa</span></td><td>COLCOT, LoDoCo2</td></tr>
+   <tr><td>Vacunación contra influenza</td><td>Anual en ECV o alto riesgo: reduce eventos CV tras SCA</td><td>IAMI</td></tr>
+  </tbody></table></div>
+
+  <h3 class="sub" id="s3-4">3.4 Paciente hospitalizado y post-evento: la oportunidad de prevención</h3>
+  <p>La hospitalización por un evento cardiovascular (o por cualquier causa en un paciente de alto riesgo) es el momento de mayor receptividad del paciente y de mayor riesgo de recurrencia. El riesgo de un nuevo evento es máximo en los primeros 12 meses tras un SCA.</p>
+  <div class="box algo"><div class="bt">⟶ Lista de prevención antes del alta tras un evento aterosclerótico</div>
+   <div class="branch">
+    <div class="step r"><div class="h">Lípidos</div>Estatina de alta intensidad <b>durante la hospitalización</b> sin esperar el perfil; LDL de base. Perfil a las 4–6 semanas; si no está en meta (&lt;55 y ↓ ≥50%), ezetimiba y luego iPCSK9. Algunos expertos inician estatina + ezetimiba desde el alta cuando el LDL basal está muy lejos de la meta.</div>
+    <div class="step"><div class="h">Antitrombóticos</div>Doble antiagregación según el evento y el riesgo de sangrado (12 meses en SCA como norma), luego monoterapia.</div>
+    <div class="step o"><div class="h">Neurohormonal</div>Betabloqueador si FEVI reducida o IAM reciente; IECA/ARA-II si HTA, DM, ERC o FEVI ≤40%; terapia de IC según indicación.</div>
+    <div class="step p"><div class="h">Metabólico</div>Tamizar DM (HbA1c) y obesidad; iSGLT2 o GLP-1 según perfil CKM.</div>
+    <div class="step g"><div class="h">Estilo de vida</div><b>Cesación tabáquica</b> iniciada en el hospital (vareniclina), <b>rehabilitación cardiaca</b> (≥36 sesiones; reduce mortalidad), vacunación contra influenza, educación.</div>
+    <div class="step"><div class="h">Seguimiento</div>Cita a las 2–4 semanas, perfil a las 4–6 semanas, metas explícitas por escrito en el resumen de alta.</div>
+   </div>
+  </div>
+  <div class="box pearl"><div class="bt">✦ En el paciente hospitalizado por otra causa</div>
+   <p>No suspender las estatinas por el ayuno o por una cirugía: su retiro en el perioperatorio y en el SCA se asocia a más eventos. Aprovechar la hospitalización para registrar la categoría de riesgo, conciliar medicamentos (¿por qué no recibe estatina un diabético de 60 años?) y dejar el plan de prevención en la epicrisis.</p>
+  </div>
+
+  <h3 class="sub" id="s3-5">3.5 Situaciones especiales y pronóstico</h3>
+  <div class="tw"><table><thead><tr><th>Situación</th><th>Consideraciones</th></tr></thead><tbody>
+   <tr><td><b>Mujeres</b></td><td>Subestimación frecuente del riesgo. Preguntar por preeclampsia, DM gestacional, parto pretérmino, menopausia precoz, SOP. Estatinas contraindicadas en embarazo: suspender al planearlo.</td></tr>
+   <tr><td><b>Adultos jóvenes (&lt;40 años)</b></td><td>Usar riesgo a 30 años, edad vascular y potenciadores. Considerar estatina si LDL ≥160 persistente con historia familiar o múltiples factores; siempre si LDL ≥190.</td></tr>
+   <tr><td><b>Mayores de 75 años</b></td><td>En prevención primaria, evidencia limitada: decisión individual (fragilidad, polifarmacia, expectativa de vida, CAC). En prevención secundaria, continuar la estatina.</td></tr>
+   <tr><td><b>Diabetes</b></td><td>40–75 años: estatina al menos de moderada intensidad; alta si daño de órgano o múltiples factores (muy alto riesgo en el consenso colombiano).</td></tr>
+   <tr><td><b>ERC</b></td><td>TFGe ≤30: muy alto riesgo; 30–60: alto. En diálisis no se inicia estatina de rutina (4D, AURORA), pero se continúa si ya la recibía.</td></tr>
+   <tr><td><b>VIH</b></td><td>Riesgo aumentado ≈ 1,5–2 veces. REPRIEVE: pitavastatina 4 mg ↓ 35% eventos en VIH con riesgo bajo-moderado. Vigilar interacciones con inhibidores de proteasa.</td></tr>
+   <tr><td><b>Enfermedades inflamatorias</b></td><td>AR, psoriasis, LES, EII: potenciadores; controlar la actividad inflamatoria y minimizar corticoides.</td></tr>
+   <tr><td>Supervivientes de cáncer</td><td>Radioterapia torácica y antraciclinas aumentan el riesgo; tamizar y tratar factores.</td></tr>
+   <tr><td>Hipertrigliceridemia grave (≥500–1.000 mg/dL)</td><td>Prioridad: prevenir pancreatitis (restricción de grasa, alcohol cero, fibrato).</td></tr>
+  </tbody></table></div>
+
+  <h4>Pronóstico</h4>
+  <div class="cols2">
+   <p>El pronóstico depende del riesgo absoluto y de la carga acumulada de exposición. Alcanzar metas reduce eventos de forma proporcional a la magnitud y duración de la reducción. Las personas con salud CV óptima (puntaje LE8 alto) a los 50 años viven ≈ 10 años más libres de enfermedad crónica que aquellas con puntaje bajo. Tras un SCA, el control de los factores de riesgo, la rehabilitación y la adherencia son los principales determinantes de recurrencia.</p>
+   <div class="box pearl" style="margin:0"><div class="bt">✦ Regla para recordar</div><p><b>"Más bajo, más temprano, por más tiempo"</b>: el beneficio de reducir el LDL depende de cuánto baja (≈ 22% por cada 39 mg/dL), de cuándo se inicia y de cuánto tiempo se mantiene. La seguridad de LDL muy bajos (&lt;30 mg/dL) está documentada en FOURIER y ODYSSEY.</p></div>
+  </div>
+ </div>
+</section>
+<!-- ===================== SECCIÓN 4 ===================== -->
+<section class="sec" id="s4">
+ <div class="sec-head">
+  <span class="badge">High yield</span>
+  <h2>4. Sección práctica para el examen</h2>
+  <p class="lead">Calculadoras, preguntas de ronda, casos guiados y autoevaluación. Las herramientas son de apoyo docente: verifique siempre con el juicio clínico y las guías vigentes.</p>
+ </div>
+ <div class="sec-body">
+
+  <h3 class="sub" id="s4-1">4.1 Calculadoras y clasificadores interactivos</h3>
+  <div class="tabs" role="tablist">
+   <button role="tab" aria-selected="true" aria-controls="p1" id="t1">Algoritmo colombiano + PCE</button>
+   <button role="tab" aria-selected="false" aria-controls="p2" id="t2">LDL y brecha a la meta</button>
+   <button role="tab" aria-selected="false" aria-controls="p3" id="t3">Calcio coronario</button>
+   <button role="tab" aria-selected="false" aria-controls="p4" id="t4">Hipercolesterolemia familiar</button>
+  </div>
+
+  <div class="panel" id="p1" role="tabpanel" aria-labelledby="t1" >
+   <p class="small" style="margin-top:0">Recorre los cuatro pasos del Consenso Colombiano 2024. Marca lo que aplique; si no queda clasificado en los pasos 1–3, se usa el cálculo de PCE ajustado.</p>
+   <h4 style="margin-top:4px">Paso 1 — Muy alto riesgo</h4>
+   <div class="cols2">
+    <label class="chk"><input type="checkbox" class="s1"> ECV aterosclerótica clínica establecida</label>
+    <label class="chk"><input type="checkbox" class="s1"> Aterosclerosis subclínica con placa ≥50% o vulnerable</label>
+    <label class="chk"><input type="checkbox" class="s1"> HF homocigota o heterocigota + factor mayor</label>
+    <label class="chk"><input type="checkbox" class="s1"> ERC con TFGe ≤30</label>
+    <label class="chk"><input type="checkbox" class="s1"> DM con daño de órgano blanco, ≥3 factores o larga duración</label>
+   </div>
+   <h4>Paso 2 — Alto riesgo</h4>
+   <div class="cols2">
+    <label class="chk"><input type="checkbox" class="s2"> Múltiples factores de riesgo CV</label>
+    <label class="chk"><input type="checkbox" class="s2"> Placa &lt;50%, CAC ≥100 o &gt; p75</label>
+    <label class="chk"><input type="checkbox" class="s2"> Lp(a) &gt;180 mg/dL (430 nmol/L)</label>
+    <label class="chk"><input type="checkbox" class="s2"> PA ≥180/110, LDL &gt;190 o CT &gt;310</label>
+    <label class="chk"><input type="checkbox" class="s2"> DM + un factor y &gt;10 años de evolución</label>
+    <label class="chk"><input type="checkbox" class="s2"> HF heterocigota sin otros factores</label>
+    <label class="chk"><input type="checkbox" class="s2"> ERC con TFGe 30–60</label>
+   </div>
+   <h4>Paso 3 — Potenciadores (1–2 = moderado; ≥3 = alto)</h4>
+   <div class="cols2">
+    <label class="chk"><input type="checkbox" class="s3"> Enfermedad inflamatoria crónica o VIH</label>
+    <label class="chk"><input type="checkbox" class="s3"> ECV prematura familiar</label>
+    <label class="chk"><input type="checkbox" class="s3"> ITB &lt;0,9</label>
+    <label class="chk"><input type="checkbox" class="s3"> Lp(a) ≥50 mg/dL (125 nmol/L)</label>
+    <label class="chk"><input type="checkbox" class="s3"> PCR ≥2 mg/L</label>
+    <label class="chk"><input type="checkbox" class="s3"> ApoB ≥130 mg/dL</label>
+    <label class="chk"><input type="checkbox" class="s3"> UACR &gt;30 mg/g</label>
+    <label class="chk"><input type="checkbox" class="s3"> Preeclampsia, DM gestacional, menopausia precoz</label>
+    <label class="chk"><input type="checkbox" class="s3"> DM sin factores y &lt;10 años</label>
+    <label class="chk"><input type="checkbox" class="s3"> Pobreza multidimensional (≥5 privaciones)</label>
+   </div>
+   <h4>Paso 4 — PCE (40–79 años)</h4>
+   <div class="frm">
+    <div><label for="c_sex">Sexo</label><select id="c_sex"><option value="m">Hombre</option><option value="f">Mujer</option></select></div>
+    <div><label for="c_age">Edad (años)</label><input type="number" id="c_age" value="56"></div>
+    <div><label for="c_tc">Colesterol total (mg/dL)</label><input type="number" id="c_tc" value="220"></div>
+    <div><label for="c_hdl">HDL (mg/dL)</label><input type="number" id="c_hdl" value="42"></div>
+    <div><label for="c_sbp">PAS (mmHg)</label><input type="number" id="c_sbp" value="138"></div>
+    <div><label for="c_trt">¿Tratamiento antihipertensivo?</label><select id="c_trt"><option value="0">No</option><option value="1" selected>Sí</option></select></div>
+    <div><label for="c_smk">¿Fumador actual?</label><select id="c_smk"><option value="0" selected>No</option><option value="1">Sí</option></select></div>
+    <div><label for="c_dm">¿Diabetes?</label><select id="c_dm"><option value="0" selected>No</option><option value="1">Sí</option></select></div>
+   </div>
+   <div class="result" id="c_out" aria-live="polite"></div>
+  </div>
+
+  <div class="panel" id="p2" role="tabpanel" aria-labelledby="t2" hidden>
+   <div class="frm">
+    <div><label for="l_tc">Colesterol total (mg/dL)</label><input type="number" id="l_tc" value="240"></div>
+    <div><label for="l_hdl">HDL (mg/dL)</label><input type="number" id="l_hdl" value="40"></div>
+    <div><label for="l_tg">Triglicéridos (mg/dL)</label><input type="number" id="l_tg" value="210"></div>
+    <div><label for="l_cat">Categoría de riesgo</label><select id="l_cat"><option value="mva">Muy alto</option><option value="a" selected>Alto</option><option value="m">Moderado</option><option value="b">Bajo</option></select></div>
+    <div><label for="l_cur">Tratamiento actual</label><select id="l_cur"><option value="0" selected>Ninguno (LDL basal)</option><option value="1">Estatina moderada</option><option value="2">Estatina alta intensidad</option><option value="3">Estatina alta + ezetimiba</option></select></div>
+   </div>
+   <div class="result" id="l_out" aria-live="polite"></div>
+  </div>
+
+  <div class="panel" id="p3" role="tabpanel" aria-labelledby="t3" hidden>
+   <div class="frm">
+    <div><label for="k_cac">Puntaje de Agatston (CAC)</label><input type="number" id="k_cac" value="0"></div>
+    <div><label for="k_age">Edad (años)</label><input type="number" id="k_age" value="58"></div>
+   </div>
+   <div class="cols2" style="margin-top:12px">
+    <label class="chk"><input type="checkbox" id="k_dm"> Diabetes</label>
+    <label class="chk"><input type="checkbox" id="k_smk"> Tabaquismo activo</label>
+    <label class="chk"><input type="checkbox" id="k_fh"> Historia familiar de ECV prematura</label>
+    <label class="chk"><input type="checkbox" id="k_ckd"> ERC</label>
+    <label class="chk"><input type="checkbox" id="k_p75"> CAC &gt; percentil 75 para edad y sexo</label>
+   </div>
+   <div class="result" id="k_out" aria-live="polite"></div>
+  </div>
+
+  <div class="panel" id="p4" role="tabpanel" aria-labelledby="t4" hidden>
+   <p class="small" style="margin-top:0">Criterios de la Red de Clínicas Lipídicas Holandesas (DLCN). En cada grupo se suma solo el criterio de mayor puntaje.</p>
+   <div class="frm">
+    <div><label for="d_fam">Historia familiar</label><select id="d_fam"><option value="0">Ninguna</option><option value="1">Familiar 1.er grado con ECV prematura o LDL &gt; p95 (1)</option><option value="2">Familiar con xantomas/arco, o hijo &lt;18 años con LDL &gt; p95 (2)</option></select></div>
+    <div><label for="d_cli">Historia clínica personal</label><select id="d_cli"><option value="0">Ninguna</option><option value="1">Enfermedad cerebrovascular o arterial periférica prematura (1)</option><option value="2">Enfermedad coronaria prematura (2)</option></select></div>
+    <div><label for="d_ex">Examen físico</label><select id="d_ex"><option value="0">Normal</option><option value="4">Arco corneal antes de los 45 años (4)</option><option value="6">Xantomas tendinosos (6)</option></select></div>
+    <div><label for="d_ldl">LDL sin tratamiento (mg/dL)</label><input type="number" id="d_ldl" value="235"></div>
+    <div><label for="d_gen">Mutación funcional (LDLR, APOB, PCSK9)</label><select id="d_gen"><option value="0">No estudiada / negativa</option><option value="8">Positiva (8)</option></select></div>
+   </div>
+   <div class="result" id="d_out" aria-live="polite"></div>
+  </div>
+
+  <h3 class="sub" id="s4-2">4.2 Preguntas de ronda del internista ("corchadoras")</h3>
+  <p class="small">Haz clic en cada pregunta para revelar la respuesta y el porqué.</p>
+  <div id="rqList"></div>
+
+  <h3 class="sub" id="s4-3">4.3 Casos clínicos complejos — análisis guiado</h3>
+  <p class="small">Lee la presentación, piensa tu respuesta y revela cada paso: datos clave ➔ diagnóstico ➔ conducta inmediata.</p>
+  <div id="caseList"></div>
+
+  <h3 class="sub" id="s4-4">4.4 Autoevaluación interactiva — 15 preguntas</h3>
+  <div class="score"><span id="qScore">Puntaje: 0 / 0 respondidas</span><button class="btn o" id="qReset" type="button">Reiniciar quiz</button></div>
+  <div id="quiz"></div>
+ </div>
+</section>
+
+<!-- ===================== SECCIÓN 5 ===================== -->
+<section class="sec" id="s5">
+ <div class="sec-head">
+  <span class="badge">Referencias</span>
+  <h2>5. Bibliografía</h2>
+  <p class="lead">Citación estilo Vancouver.</p>
+ </div>
+ <div class="sec-body">
+  <ol class="refs">
+   <li>García-Peña AA, Buitrago-Sandoval AF, Álvarez-Jaramillo M, et al. Consenso colombiano para el diagnóstico y tratamiento de las dislipidemias en adultos. Rev Colomb Cardiol. 2024;31(Supl 4):3-66.</li>
+   <li>Lopez-Lopez JP, Garcia-Peña AA, Martinez-Bello D, et al. External validation and comparison of six cardiovascular risk prediction models in the PURE-Colombia study. Eur J Prev Cardiol. 2024:zwae242.</li>
+   <li>Ndumele CE, Rodriguez F, Dixon DL, et al. 2026 AHA/ACC/ADA/ASN Guideline for the Prevention, Detection, Evaluation, and Management of Cardiovascular-Kidney-Metabolic Syndrome. Circulation. 2026;154(4):e50-e158.</li>
+   <li>Ndumele CE, Rangaswami J, Chow SL, et al. Cardiovascular-kidney-metabolic health: a Presidential Advisory from the American Heart Association. Circulation. 2023;148:1606-35.</li>
+   <li>Khan SS, Matsushita K, Sang Y, et al. Development and validation of the American Heart Association's PREVENT equations. Circulation. 2024;149(6):430-49.</li>
+   <li>Goff DC Jr, Lloyd-Jones DM, Bennett G, et al. 2013 ACC/AHA guideline on the assessment of cardiovascular risk. Circulation. 2014;129(25 Suppl 2):S49-73.</li>
+   <li>D'Agostino RB Sr, Vasan RS, Pencina MJ, et al. General cardiovascular risk profile for use in primary care: the Framingham Heart Study. Circulation. 2008;117(6):743-53.</li>
+   <li>Visseren FLJ, Mach F, Smulders YM, et al. 2021 ESC Guidelines on cardiovascular disease prevention in clinical practice. Eur Heart J. 2021;42(34):3227-337.</li>
+   <li>SCORE2 working group and ESC Cardiovascular risk collaboration. SCORE2 risk prediction algorithms: new models to estimate 10-year risk of cardiovascular disease in Europe. Eur Heart J. 2021;42(25):2439-54.</li>
+   <li>SCORE2-Diabetes Working Group and the ESC Cardiovascular Risk Collaboration. SCORE2-Diabetes: 10-year cardiovascular risk estimation in type 2 diabetes in Europe. Eur Heart J. 2023;44(28):2544-56.</li>
+   <li>WHO CVD Risk Chart Working Group. World Health Organization cardiovascular disease risk charts: revised models to estimate risk in 21 global regions. Lancet Glob Health. 2019;7(10):e1332-45.</li>
+   <li>Mach F, Baigent C, Catapano AL, et al. 2019 ESC/EAS Guidelines for the management of dyslipidaemias: lipid modification to reduce cardiovascular risk. Eur Heart J. 2020;41(1):111-88.</li>
+   <li>Grundy SM, Stone NJ, Bailey AL, et al. 2018 AHA/ACC/Multisociety Guideline on the Management of Blood Cholesterol. J Am Coll Cardiol. 2019;73(24):e285-350.</li>
+   <li>Jones DW, Ferdinand KC, Taler SJ, et al. 2025 AHA/ACC/Multisociety Guideline for the Prevention, Detection, Evaluation and Management of High Blood Pressure in Adults. Hypertension. 2025;82(10):e212-316.</li>
+   <li>Ministerio de Salud y Protección Social, Colciencias. Guía de práctica clínica para la prevención, detección temprana, diagnóstico, tratamiento y seguimiento de las dislipidemias en la población mayor de 18 años. Guía n.º 27. Bogotá: Minsalud; 2014.</li>
+   <li>Ramírez Urrea JH. Síndrome cardio-reno-metabólico (CKM): Guías de práctica clínica (AHA y otras sociedades científicas, 2026), partes 1 y 2. Medellín: Perlas Clínicas, Facultad de Medicina, Universidad de Antioquia; 2026.</li>
+   <li>Velandia KD, Sandoval DA, Muñoz E. Cómo evaluar el riesgo cardiovascular y escalas validadas en Colombia. Perlas Clínicas, Facultad de Medicina, Universidad de Antioquia; 2025. DOI: 10.59473/medudea.pc.2025.110</li>
+   <li>Loscalzo J, Fauci AS, Kasper DL, Hauser SL, Longo DL, Jameson JL, editores. Harrison's Principles of Internal Medicine. 22.ª ed. Nueva York: McGraw Hill; 2025.</li>
+   <li>Yusuf S, Hawken S, Ôunpuu S, et al. Effect of potentially modifiable risk factors associated with myocardial infarction in 52 countries (the INTERHEART study). Lancet. 2004;364(9438):937-52.</li>
+   <li>Ference BA, Ginsberg HN, Graham I, et al. Low-density lipoproteins cause atherosclerotic cardiovascular disease. Evidence from genetic, epidemiologic, and clinical studies. A consensus statement from the European Atherosclerosis Society Consensus Panel. Eur Heart J. 2017;38(32):2459-72.</li>
+   <li>Cholesterol Treatment Trialists' (CTT) Collaboration. Efficacy and safety of more intensive lowering of LDL cholesterol: a meta-analysis of data from 170 000 participants in 26 randomised trials. Lancet. 2010;376(9753):1670-81.</li>
+   <li>Lloyd-Jones DM, Allen NB, Anderson CAM, et al. Life's Essential 8: updating and enhancing the American Heart Association's construct of cardiovascular health. Circulation. 2022;146(5):e18-43.</li>
+   <li>Sabatine MS, Giugliano RP, Keech AC, et al. Evolocumab and clinical outcomes in patients with cardiovascular disease (FOURIER). N Engl J Med. 2017;376(18):1713-22.</li>
+   <li>Cannon CP, Blazing MA, Giugliano RP, et al. Ezetimibe added to statin therapy after acute coronary syndromes (IMPROVE-IT). N Engl J Med. 2015;372(25):2387-97.</li>
+   <li>Nissen SE, Lincoff AM, Brennan D, et al. Bempedoic acid and cardiovascular outcomes in statin-intolerant patients (CLEAR Outcomes). N Engl J Med. 2023;388(15):1353-64.</li>
+   <li>Bhatt DL, Steg PG, Miller M, et al. Cardiovascular risk reduction with icosapent ethyl for hypertriglyceridemia (REDUCE-IT). N Engl J Med. 2019;380(1):11-22.</li>
+   <li>Lincoff AM, Brown-Frandsen K, Colhoun HM, et al. Semaglutide and cardiovascular outcomes in obesity without diabetes (SELECT). N Engl J Med. 2023;389(24):2221-32.</li>
+   <li>US Preventive Services Task Force. Aspirin use to prevent cardiovascular disease: US Preventive Services Task Force recommendation statement. JAMA. 2022;327(16):1577-84.</li>
+   <li>Grinspoon SK, Fitch KV, Zanni MV, et al. Pitavastatin to prevent cardiovascular disease in HIV infection (REPRIEVE). N Engl J Med. 2023;389(8):687-99.</li>
+   <li>Sampson M, Ling C, Sun Q, et al. A new equation for calculation of low-density lipoprotein cholesterol in patients with normolipidemia and/or hypertriglyceridemia. JAMA Cardiol. 2020;5(5):540-8.</li>
+   <li>Nordestgaard BG, Chapman MJ, Humphries SE, et al. Familial hypercholesterolaemia is underdiagnosed and undertreated in the general population: guidance for clinicians to prevent coronary heart disease. Eur Heart J. 2013;34(45):3478-90.</li>
+  </ol>
+ </div>
+</section>
+<p class="foot">Guía docente de Medicina Interna · Riesgo cardiovascular global · Contenido educativo: verificar dosis con la ficha técnica local y las guías vigentes.</p>
+</div>
+</main>
+<script>
+(function(){
+"use strict";
+var body=document.body, menuBtn=document.getElementById('menuBtn'), scrim=document.getElementById('scrim');
+function closeNav(){body.classList.remove('nav-open');menuBtn.setAttribute('aria-expanded','false');}
+menuBtn.addEventListener('click',function(){var o=body.classList.toggle('nav-open');menuBtn.setAttribute('aria-expanded',o?'true':'false');});
+scrim.addEventListener('click',closeNav);
+document.querySelectorAll('#toc a').forEach(function(a){a.addEventListener('click',closeNav);});
+var links=[].slice.call(document.querySelectorAll('#toc a'));
+var targets=links.map(function(a){return document.querySelector(a.getAttribute('href'));}).filter(Boolean);
+function onScroll(){
+  var h=document.documentElement, p=h.scrollTop/(h.scrollHeight-h.clientHeight)*100;
+  document.getElementById('progress').style.width=(p||0)+'%';
+  var cur=null; for(var i=0;i<targets.length;i++){ if(targets[i].getBoundingClientRect().top<160) cur=targets[i]; }
+  links.forEach(function(a){a.classList.toggle('active',!!cur&&a.getAttribute('href')==='#'+cur.id);});
+}
+window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+var root=document.documentElement;
+try{var st=localStorage.getItem('rcv-theme'); if(st) root.setAttribute('data-theme',st);}catch(e){}
+document.getElementById('themeBtn').addEventListener('click',function(){
+  var cur=root.getAttribute('data-theme'); if(!cur){cur=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}
+  var nx=cur==='dark'?'light':'dark'; root.setAttribute('data-theme',nx); try{localStorage.setItem('rcv-theme',nx);}catch(e){}
+});
+document.getElementById('printBtn').addEventListener('click',function(){window.print();});
+var tabs=[].slice.call(document.querySelectorAll('[role=tab]'));
+tabs.forEach(function(t){t.addEventListener('click',function(){
+  tabs.forEach(function(x){x.setAttribute('aria-selected','false');document.getElementById(x.getAttribute('aria-controls')).hidden=true;});
+  t.setAttribute('aria-selected','true');document.getElementById(t.getAttribute('aria-controls')).hidden=false;
+});});
+var lb=document.getElementById('lightbox');
+document.querySelectorAll('figure.fig img').forEach(function(im){im.addEventListener('click',function(){lb.querySelector('img').src=im.src;lb.querySelector('img').alt=im.alt;lb.classList.add('on');});});
+lb.addEventListener('click',function(){lb.classList.remove('on');});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')lb.classList.remove('on');});
+
+function $(id){return document.getElementById(id);}
+function num(id){var v=parseFloat($(id).value);return isNaN(v)?null:v;}
+function li(arr){return '<ul class="dots">'+arr.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>';}
+function pill(txt,col){return '<span class="kpi" style="background:'+col+'">'+txt+'</span>';}
+function on(sel,fn){document.querySelectorAll(sel).forEach(function(i){i.addEventListener('input',fn);i.addEventListener('change',fn);});}
+
+var TARGET={mva:{n:'Muy alto',ldl:55,nh:85,ab:65,red:true,col:'#c0392b'},a:{n:'Alto',ldl:70,nh:100,ab:80,red:true,col:'#d35400'},m:{n:'Moderado',ldl:100,nh:130,ab:100,red:false,col:'#b07a12'},b:{n:'Bajo',ldl:116,nh:150,ab:100,red:false,col:'#1e8449'}};
+function pce(sex,age,tc,hdl,sbp,trt,smk,dm){var la=Math.log(age),lt=Math.log(tc),lh=Math.log(hdl),ls=Math.log(sbp),s,S0,m;
+ if(sex==='f'){s=-29.799*la+4.884*la*la+13.540*lt-3.114*la*lt-13.578*lh+3.149*la*lh+(trt?2.019*ls:1.957*ls)+7.574*smk-1.665*la*smk+0.661*dm;S0=0.9665;m=-29.18;}
+ else{s=12.344*la+11.853*lt-2.664*la*lt-7.990*lh+1.769*la*lh+(trt?1.797*ls:1.764*ls)+7.837*smk-1.795*la*smk+0.658*dm;S0=0.9144;m=61.18;}
+ return 1-Math.pow(S0,Math.exp(s-m));}
+function metaTxt(k){var t=TARGET[k];return 'LDL &lt;'+t.ldl+' mg/dL'+(k==='mva'?' y reducción ≥50%':(k==='a'?' y/o reducción ≥50%':''))+' · no-HDL &lt;'+t.nh+' · apoB &lt;'+t.ab;}
+
+/* ---------- 1. Algoritmo colombiano ---------- */
+function calcC(){
+ var n1=document.querySelectorAll('.s1:checked').length, n2=document.querySelectorAll('.s2:checked').length, n3=document.querySelectorAll('.s3:checked').length;
+ var sex=$('c_sex').value, age=num('c_age'), tc=num('c_tc'), hdl=num('c_hdl'), sbp=num('c_sbp'), trt=+$('c_trt').value, smk=+$('c_smk').value, dm=+$('c_dm').value;
+ var cat, paso, extra='', pc=null, adj=null;
+ if(age&&tc&&hdl&&sbp&&age>=40&&age<=79){pc=pce(sex,age,tc,hdl,sbp,trt,smk,dm)*100; adj=pc*(sex==='m'?0.28:0.54);}
+ if(n1){cat='mva';paso='Paso 1: criterio de muy alto riesgo';}
+ else if(n2){cat='a';paso='Paso 2: característica de alto riesgo';}
+ else if(n3>=3){cat='a';paso='Paso 3: ≥3 potenciadores ⇒ alto riesgo';}
+ else if(n3>=1){cat='m';paso='Paso 3: '+n3+' potenciador(es) ⇒ riesgo moderado';}
+ else {
+   if(adj===null){$('c_out').innerHTML='<div class="big">Paso 4</div><p style="margin:6px 0 0">Sin criterios en los pasos 1–3. Introduce datos válidos para las PCE (edad 40–79 años).</p>';return;}
+   cat = adj>20?'a':(adj>=5?'m':'b'); paso='Paso 4: PCE ajustadas para Colombia';
+ }
+ if(pc!==null) extra='<p style="margin:8px 0 0">PCE (ASCVD a 10 años) sin ajustar: <b>'+pc.toFixed(1)+'%</b> · ajustado para Colombia (×'+(sex==='m'?'0,28':'0,54')+'): <b>'+adj.toFixed(1)+'%</b>'+(cat!=='b'&&cat!=='m'&&(n1||n2||n3)?' <span class="small">(no determina la categoría porque los pasos previos ya clasificaron)</span>':'')+'</p>';
+ else if(age&&(age<40||age>79)) extra='<p class="small" style="margin:8px 0 0">Las PCE solo son válidas entre 40 y 79 años. En menores de 40, considerar el riesgo a 30 años (PREVENT) y los potenciadores.</p>';
+ var t=TARGET[cat], R=[];
+ if(cat==='mva') R.push('Estatina de <b>alta intensidad</b> (atorvastatina 40–80 o rosuvastatina 20–40 mg); ezetimiba si no hay meta a las 4–6 semanas; luego iPCSK9 o inclisirán.');
+ else if(cat==='a') R.push('Estatina de <b>alta intensidad</b> + estilo de vida; ezetimiba si no se alcanza la meta.');
+ else if(cat==='m') R.push('Estilo de vida; estatina de <b>moderada intensidad</b> si no se alcanza la meta (decisión compartida; considerar CAC si hay duda).');
+ else R.push('Estilo de vida (Life\'s Essential 8); reevaluar el riesgo cada 4–6 años. Estatina si LDL ≥190 o aparecen factores.');
+ R.push('Controlar PA (&lt;130/80), glucemia, peso y tabaco según su perfil.');
+ $('c_out').innerHTML='<div class="big">Riesgo '+t.n.toLowerCase()+'</div><p style="margin:6px 0 4px">'+pill(t.n,t.col)+' &nbsp;'+paso+'</p><p style="margin:4px 0"><b>Metas:</b> '+metaTxt(cat)+' · TG &lt;150</p>'+extra+li(R);
+}
+on('#p1 input,#p1 select',calcC); calcC();
+
+/* ---------- 2. LDL y brecha ---------- */
+function calcL(){
+ var tc=num('l_tc'), hdl=num('l_hdl'), tg=num('l_tg'), cat=$('l_cat').value, cur=+$('l_cur').value;
+ if(!tc||!hdl||tg===null){$('l_out').innerHTML='Completa el perfil.';return;}
+ var nh=tc-hdl, fr=tc-hdl-tg/5, sam=tc/0.948-hdl/0.971-(tg/8.56+tg*nh/2140-tg*tg/16100)-9.44;
+ var ldl = tg>400? sam : fr;
+ var t=TARGET[cat], R=[];
+ var base = [ldl, ldl/0.6, ldl/0.5, ldl/(0.5*0.77)][cur]; // estimated untreated LDL
+ var target = cat==='mva'? Math.min(t.ldl, base*0.5) : (cat==='a'? Math.max(t.ldl, base*0.5) : t.ldl);
+ var need = ldl>target ? (1-target/ldl)*100 : 0;
+ var steps=[['Estatina moderada',base*0.6],['Estatina alta intensidad',base*0.5],['Alta intensidad + ezetimiba',base*0.5*0.77],['+ iPCSK9',base*0.5*0.77*0.4]];
+ var rows=steps.map(function(s,i){var ok=s[1]<=target+0.5;return '<tr><td>'+s[0]+'</td><td class="c">'+Math.round(s[1])+'</td><td class="c">'+(ok?'✔ en meta':'—')+'</td></tr>';}).join('');
+ if(tg>400) R.push('TG &gt;400: Friedewald no es válida; se muestra la ecuación de <b>Sampson (NIH)</b>. Ideal: LDL directo o apoB.');
+ if(nh>=t.nh) R.push('El <b>no-HDL</b> ('+nh+' mg/dL) también está fuera de meta (&lt;'+t.nh+'): con TG altos refleja mejor la carga aterogénica.');
+ if(tg>=150) if(cat==='a') R.push('Alto riesgo: la meta es LDL &lt;70 <b>y/o</b> reducción ≥50% del basal; se muestra el valor que cumple al menos uno de los dos criterios. Idealmente, ambos.');
+ if(cat==='mva') R.push('Muy alto riesgo: deben cumplirse <b>ambos</b> criterios (LDL &lt;55 y ≥50% de reducción).');
+ R.push('TG ≥150: corregir alcohol, azúcares, peso y glucemia; si persisten con LDL controlado y ECV o DM, considerar icosapento.');
+ $('l_out').innerHTML='<div class="big">LDL '+Math.round(ldl)+' mg/dL</div><p style="margin:6px 0 8px">Friedewald: <b>'+Math.round(fr)+'</b> · Sampson/NIH: <b>'+Math.round(sam)+'</b> · No-HDL: <b>'+nh+'</b> &nbsp;'+pill('Meta '+t.n.toLowerCase()+': LDL '+(target<t.ldl||(cat==='a'&&target>t.ldl)?'≤':'&lt;')+Math.round(target),t.col)+'</p>'+
+  '<p style="margin:0 0 8px">Reducción adicional necesaria: <b>'+need.toFixed(0)+'%</b>'+(cur>0?' · LDL basal estimado sin tratamiento ≈ '+Math.round(base)+' mg/dL':'')+'</p>'+
+  '<div class="tw" style="margin:6px 0"><table style="min-width:0"><thead><tr><th>Esquema</th><th class="c">LDL proyectado</th><th class="c">¿Meta?</th></tr></thead><tbody>'+rows+'</tbody></table></div>'+li(R.concat(['Proyecciones aproximadas: estatina moderada ↓ 40%, alta ↓ 50%, ezetimiba ↓ 23% adicional, iPCSK9 ↓ 60% adicional. La respuesta individual varía.']));
+}
+on('#p2 input,#p2 select',calcL); calcL();
+
+/* ---------- 3. CAC ---------- */
+function calcK(){
+ var c=num('k_cac'), age=num('k_age')||0, dm=$('k_dm').checked, smk=$('k_smk').checked, fh=$('k_fh').checked, ckd=$('k_ckd').checked, p75=$('k_p75').checked, R=[], t, col;
+ if(c===null){$('k_out').innerHTML='Introduce el puntaje.';return;}
+ if(c===0){
+  if(dm||smk||fh||ckd){t='CAC 0 con condición de alto riesgo';col='#d35400';R.push('Un CAC de cero <b>no</b> excluye el riesgo en DM, tabaquismo activo, historia familiar fuerte o ERC: mantener la indicación de estatina según la categoría.');}
+  else {t='CAC 0';col='#1e8449';R.push('Riesgo de eventos a 10 años muy bajo: es razonable <b>diferir la estatina</b> y reforzar el estilo de vida (salvo LDL ≥190).');R.push('Repetir en '+(age>=60?'3–5':'5–7')+' años si persiste la duda.');}
+ } else if(c<100){
+  t='CAC 1–99';col='#b07a12';R.push('Aterosclerosis presente: <b>favorece iniciar estatina</b> de moderada intensidad, sobre todo en ≥55 años.');
+  if(p75) R.push('&gt; percentil 75: tratar como alto riesgo (estatina de alta intensidad).');
+ } else if(c<1000){
+  t='CAC 100–999';col='#d35400';R.push('<b>Alto riesgo</b> (paso 2 del consenso colombiano; estadio CKM 3): estatina de alta intensidad, meta LDL &lt;70 mg/dL.');R.push('Considerar aspirina solo si el riesgo de sangrado es bajo (decisión individual).');
+ } else {
+  t='CAC ≥1.000';col='#c0392b';R.push('Riesgo similar a prevención secundaria: estatina de alta intensidad ± ezetimiba, meta LDL &lt;55 mg/dL (guía CKM 2026).');R.push('Evaluar síntomas de isquemia; control intensivo de todos los factores.');
+ }
+ $('k_out').innerHTML='<div class="big">'+t+'</div><p style="margin:6px 0 8px">'+pill('Agatston '+c,col)+'</p>'+li(R);
+}
+on('#p3 input',calcK); calcK();
+
+/* ---------- 4. DLCN ---------- */
+function calcD(){
+ var l=num('d_ldl')||0, lp= l>=330?8:(l>=250?5:(l>=190?3:(l>=155?1:0)));
+ var s=+$('d_fam').value + +$('d_cli').value + +$('d_ex').value + lp + +$('d_gen').value, t, col;
+ if(s>8){t='HF definida';col='#c0392b';} else if(s>=6){t='HF probable';col='#d35400';} else if(s>=3){t='HF posible';col='#b07a12';} else {t='HF improbable';col='#1e8449';}
+ var R=['Puntaje de LDL: '+lp+' (≥330: 8 · 250–329: 5 · 190–249: 3 · 155–189: 1).'];
+ if(s>=6){R.push('Estatina de <b>alta intensidad</b> desde ya (no calcular escala); meta de alto riesgo (LDL &lt;70 y ↓ ≥50%), o muy alto si hay ECV u otro factor mayor.');R.push('Ezetimiba e iPCSK9 con frecuencia necesarios.');R.push('<b>Tamizaje en cascada</b>: perfil lipídico a familiares de primer grado (incluidos niños desde los 2–10 años). Estudio genético si está disponible.');}
+ else if(s>=3) R.push('Descartar causas secundarias (hipotiroidismo, nefrótico, colestasis); considerar estudio genético y tamizaje familiar.');
+ else R.push('Probable dislipidemia poligénica o secundaria; estratificar con el algoritmo habitual.');
+ $('d_out').innerHTML='<div class="big">'+t+' — '+s+' puntos</div><p style="margin:6px 0 8px">'+pill('&gt;8 definida · 6–8 probable · 3–5 posible · &lt;3 improbable',col)+'</p>'+li(R);
+}
+on('#p4 input,#p4 select',calcD); calcD();
+/* ---------- Preguntas de ronda ---------- */
+var RQ=[
+["¿Por qué en Colombia no se usan las PCE \"tal cual\"?",
+ "<p>Porque fueron derivadas en cohortes estadounidenses con mayor incidencia de eventos. La validación externa en <b>PURE-Colombia</b> mostró que <b>sobrestiman</b> el riesgo en colombianos.</p><p>El Consenso Colombiano 2024 propone recalibrarlas multiplicando por <b>0,28 en hombres y 0,54 en mujeres</b>, y usarlas solo en el paso 4, cuando los criterios clínicos (pasos 1–3) no clasifican al paciente. Antes, la GPC de 2014 recomendaba Framingham × 0,75.</p>"],
+["Paciente diabético de 58 años con albuminuria. Un residente quiere calcularle el riesgo con PCE. ¿Qué le dice?",
+ "<p>Que no hace falta: la <b>DM con daño de órgano blanco</b> (albuminuria) lo clasifica como <b>muy alto riesgo</b> en el paso 1 del algoritmo colombiano. Meta: LDL &lt;55 mg/dL y reducción ≥50%.</p><p>Las escalas son para quienes no tienen ya una condición de alto o muy alto riesgo; aplicarlas en ellos suele subestimar y retrasar el tratamiento.</p>"],
+["¿Por qué PREVENT da cifras menores que las PCE y qué consecuencia tiene?",
+ "<p>PREVENT se derivó en cohortes más recientes y amplias (con menor incidencia de eventos por mejor tratamiento poblacional), incorpora TFGe, uso de estatinas y antihipertensivos, y no usa raza. En promedio estima <b>cerca de la mitad</b> que las PCE.</p><p>Consecuencia: los umbrales cambiaron (p. ej., <b>7,5%</b> para iniciar fármaco en HTA estadio 1). Usar los umbrales de las PCE con PREVENT haría que muchos pacientes quedaran sin tratamiento. En Colombia aún no está validada.</p>"],
+["¿Qué ventaja tiene PREVENT al incluir la insuficiencia cardiaca?",
+ "<p>La IC es una de las principales consecuencias del síndrome cardio-reno-metabólico y no estaba en las PCE. PREVENT estima <b>ECV total = ASCVD + IC</b>, y cada componente por separado.</p><p>Un PREVENT-HF ≥5% hace razonable medir NT-proBNP o troponina para buscar pre-IC, y orienta el uso de iSGLT2 en diabéticos o con ERC.</p>"],
+["Mujer de 34 años con LDL 175 mg/dL y padre infartado a los 49. Su riesgo a 10 años es 0,8%. ¿La tranquiliza?",
+ "<p><b>No del todo.</b> El riesgo a 10 años siempre es bajo a esa edad. Conviene estimar el <b>riesgo a 30 años</b> (PREVENT, 30–59 años) y contar potenciadores: historia familiar prematura, y medir Lp(a).</p><p>Con LDL ≥160 persistente e historia familiar, una estatina es razonable tras decisión compartida (si no planea embarazo). Descartar HF con los criterios DLCN. El concepto clave es la <b>exposición acumulada</b>: tratar temprano evita más eventos.</p>"],
+["¿Cuándo pedir calcio coronario y qué hacer con un CAC de cero?",
+ "<p>En riesgo <b>limítrofe o intermedio</b> con incertidumbre para iniciar la estatina, cuando el resultado vaya a cambiar la decisión.</p><p>CAC 0: puede diferirse la estatina y repetir en 3–7 años, <b>excepto</b> en DM, tabaquismo activo, historia familiar fuerte o ERC, en quienes un CAC de cero no excluye el riesgo. CAC ≥100: estatina (alto riesgo); ≥1.000: comportamiento de prevención secundaria.</p>"],
+["¿Por qué medir la Lp(a) una vez en la vida?",
+ "<p>Porque está determinada genéticamente en &gt;90%, se mantiene estable a lo largo de la vida y es un factor causal e independiente de aterosclerosis y estenosis aórtica. No se modifica con dieta ni con estatinas (los iPCSK9 la bajan ≈ 25%).</p><p>≥50 mg/dL (125 nmol/L) es potenciador; &gt;180 mg/dL (430 nmol/L) clasifica como alto riesgo. Justifica intensificar el control del LDL y tamizar a familiares. Hay terapias específicas en ensayos de fase 3 (pelacarsen, olpasiran, lepodisiran).</p>"],
+["¿Por qué con TG de 280 mg/dL no confía en el LDL?",
+ "<p>Con TG elevados, la fórmula de Friedewald subestima el LDL (asume una relación TG/VLDL fija), y además buena parte del colesterol aterogénico viaja en <b>remanentes ricos en TG</b>.</p><p>Usar el <b>no-HDL</b> (CT − HDL) o la <b>apoB</b>, que miden toda la carga aterogénica. Con TG &gt;400, Friedewald es inválida: LDL directo o ecuación de Sampson/NIH.</p>"],
+["¿Aspirina para un hombre de 68 años, diabético, sin ECV?",
+ "<p>No de rutina. ASCEND (DM), ARRIVE (riesgo moderado) y ASPREE (≥70 años) mostraron que en prevención primaria la reducción de eventos isquémicos se compensa con más sangrado mayor.</p><p>Puede considerarse en 40–70 años con riesgo CV alto y bajo riesgo de sangrado, en decisión compartida. Después de los 70, no se inicia. En prevención secundaria sí está indicada.</p>"],
+["Paciente con mialgias atribuidas a la atorvastatina. ¿La etiqueta como intolerante?",
+ "<p>No todavía. Revisar TSH, vitamina D, CK, interacciones (macrólidos, azoles, fibratos, amiodarona) y ejercicio intenso. En ensayos ciegos (SAMSON, StatinWISE), la mayoría de los síntomas aparecen también con placebo: <b>efecto nocebo</b>.</p><p>Estrategia: suspender hasta que ceda, reintentar con otra estatina (rosuvastatina, pravastatina), dosis menor o dosis alternas. Solo si fracasan ≥2 estatinas (una a dosis mínima): intolerancia. Alternativas: ezetimiba, ácido bempedoico, iPCSK9.</p>"],
+["¿La reducción de LDL tiene un \"piso\" de seguridad?",
+ "<p>No se ha identificado un umbral inferior por debajo del cual se pierda el beneficio o aumenten los eventos adversos graves. En FOURIER y ODYSSEY, pacientes con LDL &lt;25–30 mg/dL tuvieron menos eventos sin señales de seguridad (cognición, cáncer, ACV hemorrágico).</p><p>Los recién nacidos tienen LDL de 30–70 mg/dL, y las personas con mutaciones de pérdida de función de PCSK9 viven con LDL muy bajo y menos ECV.</p>"],
+["¿Qué diferencia hay entre estadio CKM y categoría de riesgo?",
+ "<p>El <b>estadio CKM</b> (0–4) ubica al paciente en el continuo fisiopatológico: adiposidad, factores metabólicos/ERC, ECV subclínica o ECV clínica. La <b>categoría de riesgo</b> (bajo, moderado, alto, muy alto) define metas de LDL y umbrales terapéuticos.</p><p>Se usan juntos: una paciente en estadio 1 con artritis reumatoide, Lp(a) alta y padre infartado joven puede ser de alto riesgo; un joven en estadio 2 puede tener riesgo bajo a 10 años y alto a 30.</p>"],
+["En el paciente hospitalizado por SCA, ¿espera el perfil lipídico para iniciar la estatina?",
+ "<p><b>No.</b> Estatina de alta intensidad durante la hospitalización, independientemente del LDL basal (PROVE-IT, MIRACL). El LDL puede bajar falsamente en las primeras 24–48 h del evento.</p><p>Perfil a las 4–6 semanas; si no cumple LDL &lt;55 y reducción ≥50%, añadir ezetimiba y luego iPCSK9. Antes del alta: cesación tabáquica, rehabilitación cardiaca, vacunación, metas por escrito.</p>"],
+["¿Por qué la ERC aumenta tanto el riesgo cardiovascular?",
+ "<p>Comparte los factores tradicionales (HTA, DM) y suma factores propios: inflamación, estrés oxidativo, anemia, sobrecarga de volumen, calcificación vascular por alteración del metabolismo mineral, toxinas urémicas y activación del SRAA.</p><p>Un paciente con ERC G3–G4 tiene más probabilidad de morir de causa CV que de llegar a diálisis. Por eso TFGe 30–60 = alto riesgo y ≤30 = muy alto riesgo, y la UACR es potenciador. iSGLT2 e IECA/ARA-II protegen corazón y riñón.</p>"],
+["¿Qué paciente con hipertrigliceridemia se beneficia del icosapento de etilo?",
+ "<p>REDUCE-IT: pacientes con <b>ECV establecida, o DM + ≥1 factor</b>, en estatina, con <b>TG 150–499 mg/dL y LDL 40–100</b>. Redujo 25% los eventos CV mayores con EPA purificado 2 g c/12 h.</p><p>No es lo mismo que los omega-3 de venta libre (mezclas EPA/DHA sin beneficio en eventos, STRENGTH). Efectos: más FA y sangrado. Con TG ≥500, la prioridad es prevenir pancreatitis.</p>"]
+];
+$('rqList').innerHTML=RQ.map(function(q,i){return '<details class="rq"><summary><span class="num">'+(i+1)+'</span>'+q[0]+'</summary><div class="ans">'+q[1]+'</div></details>';}).join('');
+
+/* ---------- Casos ---------- */
+var CASES=[
+{t:"Caso 1 · El paciente \"sin enfermedad\" con varios factores moderados", tag:"Consulta",
+ p:"Hombre de 56 años, conductor, asintomático, que acude al programa de promoción y mantenimiento. HTA en tratamiento con losartán 50 mg. No diabético. Fuma 5 cigarrillos/día. Sedentario. IMC 29, cintura 103 cm, PA 138/86 mmHg. CT 220 mg/dL, HDL 42, TG 190, LDL calculado 140, glucemia 104, TFGe 82, UACR 18 mg/g.",
+ k:["No tiene ECV ni criterios de muy alto riesgo (paso 1).","Paso 2: <b>múltiples factores de riesgo</b> (HTA, tabaquismo, dislipidemia aterogénica, obesidad abdominal, glucemia alterada) ⇒ alto riesgo sin necesidad de PCE.","Como ejercicio: PCE ≈ 18,4% ⇒ ajustado × 0,28 ≈ 5,2% (moderado). El algoritmo prioriza los criterios clínicos: por eso la clasificación final es alto riesgo.","Cumple síndrome metabólico (cintura, TG, PA, glucemia) ⇒ estadio CKM 2."],
+ d:"Riesgo cardiovascular alto (paso 2 del algoritmo colombiano); síndrome metabólico, estadio CKM 2.",
+ c:["Metas: LDL &lt;70 mg/dL y/o reducción ≥50% (≤70), no-HDL &lt;100 (hoy 178), PA &lt;130/80.","Atorvastatina 40 mg (o rosuvastatina 20 mg); perfil a las 6 semanas; ezetimiba si no hay meta.","<b>Cesación tabáquica</b>: consejería 5 A + vareniclina.","Optimizar PA: losartán 100 mg o combinación con amlodipino; AMPA.","Estilo de vida: DASH, 150 min/semana, meta de pérdida 5–10%; tamizar apnea (conductor).","Repetir HbA1c (prediabetes) y UACR anual."]},
+{t:"Caso 2 · La mujer cuyo riesgo calculado engaña", tag:"Consulta",
+ p:"Mujer de 52 años, docente, con antecedente de preeclampsia en sus dos embarazos y menopausia a los 39 años. No fuma. PA 126/80, IMC 26, cintura 84 cm. CT 245 mg/dL, HDL 58, TG 130, LDL 161, glucemia 92, TFGe 95, UACR 10. Lp(a) 140 nmol/L. PCR ultrasensible 2,6 mg/L. PCE: 1,7% ⇒ ajustado × 0,54 ≈ 0,9%.",
+ k:["Sin criterios de los pasos 1 y 2 (Lp(a) 140 nmol/L no llega a 430).","Paso 3, potenciadores: <b>preeclampsia</b>, <b>menopausia precoz</b>, <b>Lp(a) ≥125 nmol/L</b>, <b>PCR ≥2 mg/L</b> ⇒ 4 potenciadores ⇒ <b>alto riesgo</b>.","El paso 4 (PCE) no se usa porque el paso 3 ya clasificó: si se hubiera usado, habría quedado como \"riesgo bajo\".","Estadio CKM 1 (sobrepeso sin factores del estadio 2)."],
+ d:"Riesgo cardiovascular alto por potenciadores (paso 3), con riesgo calculado engañosamente bajo.",
+ c:["Meta LDL &lt;70 y/o reducción ≥50% (≤80).","Estatina de alta intensidad (rosuvastatina 20 mg) tras decisión compartida; si hay duda, un CAC puede ayudar (pero con Lp(a) alta, un CAC de cero no anula el riesgo a largo plazo).","Estilo de vida; controlar PA (vigilar HTA posmenopáusica).","Tamizaje en cascada de Lp(a) en hijos y hermanos.","No aspirina de rutina en prevención primaria."]},
+{t:"Caso 3 · Joven con xantomas: no es solo \"colesterol alto\"", tag:"Consulta",
+ p:"Hombre de 29 años, deportista, remitido por LDL de 238 mg/dL en un examen laboral. No fuma. Su padre tuvo un infarto a los 44 años y una tía paterna usa \"una inyección para el colesterol\". Al examen: engrosamiento nodular de ambos tendones de Aquiles y arco corneal. TSH, función renal y hepática normales; sin proteinuria.",
+ k:["LDL ≥190 mg/dL: no se calcula escala; es alto riesgo por definición.","DLCN: familiar con ECV prematura (1) + xantomas tendinosos (6) + LDL 190–249 (3) = <b>10 puntos ⇒ HF definida</b>.","Causas secundarias descartadas (TSH, riñón, hígado)."],
+ d:"Hipercolesterolemia familiar heterocigota (definida por criterios DLCN).",
+ c:["Estatina de alta intensidad (rosuvastatina 20–40 mg) desde ya; meta LDL &lt;70 y ≥50% de reducción (sin otros factores, alto riesgo; con otro factor mayor, muy alto riesgo).","Ezetimiba si no hay meta; iPCSK9 con frecuencia necesario.","<b>Tamizaje en cascada</b>: perfil lipídico a hermanos, hijos y demás familiares de primer grado; estudio genético si está disponible.","Medir Lp(a). Considerar CAC o ecografía vascular para estratificar.","Educación: no fumar, mantener actividad física; la exposición acumulada desde la infancia es lo que determina el riesgo."]},
+{t:"Caso 4 · Riesgo intermedio y la ayuda del calcio coronario", tag:"Consulta",
+ p:"Hombre de 60 años, no fumador, no diabético, PA 132/80 sin tratamiento, CT 210, HDL 48, LDL 135, TG 135. Sin potenciadores conocidos. PCE ≈ 9,8% ⇒ ajustado × 0,28 ≈ 2,7% (bajo). Él no quiere \"tomar pastillas de por vida\" y pregunta si hay forma de afinar el riesgo. Se solicita CAC.",
+ k:["Sin criterios en pasos 1–3; paso 4 lo clasifica como bajo riesgo (meta LDL &lt;116).","Hay discordancia entre la escala sin ajustar (intermedia) y la ajustada (baja): situación de incertidumbre en la que el CAC está indicado (IIa) si va a cambiar la decisión.","Escenario A: CAC 0 ⇒ diferir estatina. Escenario B: CAC 320 ⇒ alto riesgo."],
+ d:"Riesgo bajo-intermedio con incertidumbre: reclasificación con calcio coronario.",
+ c:["Si <b>CAC 0</b>: estilo de vida, sin estatina por ahora; repetir CAC en 5 años; controlar PA (estadio 1).","Si <b>CAC 320</b>: aterosclerosis subclínica ⇒ alto riesgo (paso 2) y estadio CKM 3; atorvastatina 40 mg con meta LDL &lt;70.","En ambos casos: decisión compartida, explicar el beneficio absoluto y documentar el plan."]},
+{t:"Caso 5 · Hospitalizado por infarto: la epicrisis que previene el siguiente", tag:"Hospitalización",
+ p:"Mujer de 63 años, diabética e hipertensa, hospitalizada por IAM sin elevación del ST con angioplastia de la circunfleja. Previo al evento recibía metformina y enalapril, sin estatina. LDL al ingreso 128 mg/dL, HbA1c 8,2%, IMC 31, TFGe 64, UACR 70 mg/g. Fuma 10 cigarrillos/día. FEVI 52%. Se prepara el egreso.",
+ k:["Prevención secundaria: <b>muy alto riesgo</b> (ECV clínica + DM con daño de órgano).","Meta LDL &lt;55 y reducción ≥50% (≤64): con estatina sola es probable que no la alcance.","DM con ECV, obesidad y albuminuria: indicación de fármacos con beneficio cardiorrenal.","Estadio CKM 4a."],
+ d:"IAM sin elevación del ST en paciente con DM2, HTA, obesidad, ERC A2 y tabaquismo: muy alto riesgo.",
+ c:["Atorvastatina 80 mg desde la hospitalización; ezetimiba al alta o a las 4–6 semanas si LDL ≥55; luego iPCSK9.","Doble antiagregación por 12 meses (según riesgo de sangrado); betabloqueador; mantener IECA (albuminuria).","<b>Agonista GLP-1</b> con beneficio CV (obesidad, HbA1c alta) y/o <b>iSGLT2</b> (ERC A2); metformina como complemento.","Cesación tabáquica con vareniclina iniciada en el hospital; <b>rehabilitación cardiaca</b>; vacuna contra influenza.","Epicrisis con categoría de riesgo y metas explícitas (LDL, PA &lt;130/80, HbA1c &lt;7%), perfil a las 4–6 semanas y cita a las 2 semanas."]}
+];
+$('caseList').innerHTML=CASES.map(function(c){
+ return '<div class="case"><div class="case-h"><b>'+c.t+'</b><span class="badge">'+c.tag+'</span></div><div class="case-b">'+
+  '<div class="stage"><div class="lab">Presentación</div><p style="margin:4px 0 0">'+c.p+'</p></div>'+
+  '<div class="stage hidden" data-s="1"><div class="lab">Datos clave</div>'+li(c.k)+'</div>'+
+  '<div class="stage dx hidden" data-s="2"><div class="lab">Diagnóstico</div><p style="margin:4px 0 0"><b>'+c.d+'</b></p></div>'+
+  '<div class="stage tx hidden" data-s="3"><div class="lab">Conducta inmediata</div>'+li(c.c)+'</div>'+
+  '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button class="btn o cnext" type="button">Revelar datos clave</button><button class="btn ghost call" type="button">Mostrar todo</button></div></div></div>';
+}).join('');
+var labels=['Revelar datos clave','Revelar diagnóstico','Revelar conducta','Caso completo ✓'];
+document.querySelectorAll('.case').forEach(function(cs){
+ var step=0, nb=cs.querySelector('.cnext');
+ function show(n){cs.querySelectorAll('.stage[data-s]').forEach(function(s){if(+s.getAttribute('data-s')<=n) s.classList.remove('hidden');});step=n;nb.textContent=labels[Math.min(n,3)];nb.disabled=n>=3;}
+ nb.addEventListener('click',function(){show(step+1);});
+ cs.querySelector('.call').addEventListener('click',function(){show(3);});
+});
+
+/* ---------- Quiz ---------- */
+var QZ=[
+{q:"El riesgo cardiovascular global se define como:",o:["La suma de los factores de riesgo presentes","La probabilidad de un evento CV en un periodo definido considerando todos los factores","El nivel de LDL ajustado por edad","El riesgo relativo frente a la población general"],a:1,e:"Es un riesgo <b>absoluto</b> (habitualmente a 10 años) que integra los factores de forma multiplicativa."},
+{q:"Factor de ajuste de las PCE para hombres colombianos (Consenso 2024):",o:["× 0,75","× 0,54","× 0,28","× 1,5"],a:2,e:"Hombres × 0,28; mujeres × 0,54 (calibración PURE-Colombia). El × 0,75 era el ajuste de Framingham en la GPC de 2014."},
+{q:"En el algoritmo colombiano, una ERC con TFGe de 25 mL/min/1,73 m² clasifica como:",o:["Riesgo moderado","Riesgo alto","Riesgo muy alto","Se debe calcular PCE"],a:2,e:"TFGe ≤30: muy alto riesgo (paso 1). TFGe 30–60: alto riesgo (paso 2)."},
+{q:"Una paciente sin criterios de pasos 1–2 tiene 3 potenciadores. Su categoría es:",o:["Bajo","Moderado","Alto","Muy alto"],a:2,e:"Paso 3: 1–2 potenciadores = moderado; ≥3 = alto."},
+{q:"Meta de LDL en muy alto riesgo según el consenso colombiano:",o:["&lt;100 mg/dL","&lt;70 mg/dL","&lt;55 mg/dL y reducción ≥50%","&lt;40 mg/dL en todos"],a:2,e:"Muy alto: LDL &lt;55 y ↓ ≥50%, no-HDL &lt;85, apoB &lt;65. &lt;40 puede considerarse ante un segundo evento en 2 años."},
+{q:"¿Qué desenlace incluye PREVENT que no incluían las PCE?",o:["Muerte por cualquier causa","Insuficiencia cardiaca","Fibrilación auricular","Enfermedad renal terminal"],a:1,e:"PREVENT estima ECV total = ASCVD + IC, a 10 y 30 años."},
+{q:"Umbral de PREVENT-CVD a 10 años para iniciar antihipertensivo en HTA estadio 1 (AHA/ACC 2025):",o:["≥5%","≥7,5%","≥10%","≥20%"],a:1,e:"PREVENT ≥7,5% (o ECV, DM, ERC): fármaco + estilo de vida. ≥20% equivale a estadio CKM 3."},
+{q:"Paciente de 55 años con CAC de 0, sin diabetes, no fumador, sin historia familiar. Conducta más razonable:",o:["Estatina de alta intensidad","Diferir la estatina y reevaluar en 5–7 años","Aspirina","Angiografía coronaria"],a:1,e:"CAC 0 en ausencia de DM, tabaquismo, historia familiar fuerte o ERC permite diferir la estatina."},
+{q:"¿Con qué frecuencia debe medirse la Lp(a)?",o:["Anualmente","Cada 5 años","Una vez en la vida","Solo si hay ECV"],a:2,e:"Determinada genéticamente y estable: una medición basta (salvo situaciones especiales)."},
+{q:"Con TG de 450 mg/dL, el mejor parámetro para seguir la carga aterogénica es:",o:["LDL por Friedewald","HDL","No-HDL o apoB","Colesterol total"],a:2,e:"Friedewald es inválida con TG &gt;400; no-HDL y apoB reflejan todas las partículas aterogénicas."},
+{q:"Reducción esperada de eventos vasculares mayores por cada 39 mg/dL (1 mmol/L) de reducción del LDL:",o:["≈ 5%","≈ 22%","≈ 50%","≈ 70%"],a:1,e:"Metaanálisis CTT: ≈ 22% por mmol/L, proporcional a la reducción absoluta y sin umbral inferior identificado."},
+{q:"Puntaje DLCN de un paciente con xantomas tendinosos y LDL 260 mg/dL (sin otros datos):",o:["6 — probable","8 — probable","11 — definida","5 — posible"],a:2,e:"Xantomas (6) + LDL 250–329 (5) = 11: HF definida (&gt;8)."},
+{q:"Aspirina en prevención primaria en un paciente de 74 años:",o:["Indicada si es diabético","Indicada si LDL &gt;130","No se recomienda iniciarla","Indicada si PREVENT &gt;10%"],a:2,e:"ASPREE: sin beneficio y más sangrado en ≥70 años; no se inicia en prevención primaria."},
+{q:"Tras un SCA, la estatina de alta intensidad debe iniciarse:",o:["Cuando el perfil lipídico confirme LDL &gt;100","Durante la hospitalización, independientemente del LDL","A los 3 meses del alta","Solo si es diabético"],a:1,e:"Se inicia en la hospitalización sin esperar el perfil; control a las 4–6 semanas para escalar."},
+{q:"Fármaco hipolipemiante cuyo ensayo de desenlaces se hizo en pacientes intolerantes a estatinas:",o:["Ezetimiba (IMPROVE-IT)","Ácido bempedoico (CLEAR Outcomes)","Evolocumab (FOURIER)","Icosapento (REDUCE-IT)"],a:1,e:"CLEAR Outcomes: ácido bempedoico redujo 13% los eventos en pacientes con intolerancia a estatinas."}
+];
+var answered=0, correct=0;
+function updScore(){var t='Puntaje: '+correct+' / '+answered+' respondidas'; if(answered===QZ.length){t+=' · Nota equivalente: '+(correct/QZ.length*5).toFixed(1)+' / 5.0';} $('qScore').textContent=t;}
+function renderQuiz(){
+ answered=0;correct=0;updScore();
+ $('quiz').innerHTML=QZ.map(function(x,i){
+  return '<div class="qz" data-i="'+i+'"><div class="qt"><span>'+(i+1)+'.</span> '+x.q+'</div><div class="opts">'+
+   x.o.map(function(o,j){return '<button class="opt" type="button" data-j="'+j+'">'+String.fromCharCode(65+j)+') '+o+'</button>';}).join('')+
+   '</div><div class="exp"><b>Respuesta correcta: '+String.fromCharCode(65+x.a)+'.</b> '+x.e+'</div></div>';
+ }).join('');
+ document.querySelectorAll('.qz').forEach(function(b){
+  var i=+b.getAttribute('data-i');
+  b.querySelectorAll('.opt').forEach(function(btn){btn.addEventListener('click',function(){
+   if(b.classList.contains('done')) return;
+   var j=+btn.getAttribute('data-j'); b.classList.add('done'); answered++;
+   if(j===QZ[i].a){btn.classList.add('right');correct++;} else {btn.classList.add('wrong');b.querySelector('[data-j="'+QZ[i].a+'"]').classList.add('right');}
+   b.querySelectorAll('.opt').forEach(function(x){x.disabled=true;}); updScore();
+  });});
+ });
+}
+$('qReset').addEventListener('click',renderQuiz); renderQuiz();
+})();
+</script>
+</body>
+</html>
